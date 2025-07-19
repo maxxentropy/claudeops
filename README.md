@@ -6,20 +6,44 @@ Your personal Claude Code configuration repository for maximizing productivity a
 
 1. **Clone this repository**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/claude-config.git ~/.claude-config
+   git clone https://github.com/YOUR_USERNAME/claudeops.git ~/claudeops
    ```
 
 2. **Run the sync script**:
+   
+   **PowerShell (Windows):**
+   ```powershell
+   ~/claudeops/sync.ps1
+   ```
+   
+   **Bash (Mac/Linux):**
    ```bash
-   ~/.claude-config/sync.sh
+   ~/claudeops/sync.sh
    ```
 
-3. **Set your API key**:
+3. **Set your API key** (if using API authentication):
+   
+   **PowerShell:**
+   ```powershell
+   $env:CLAUDE_API_KEY = 'your-api-key-here'
+   [Environment]::SetEnvironmentVariable('CLAUDE_API_KEY', 'your-api-key-here', 'User')
+   ```
+   
+   **Bash:**
    ```bash
    export CLAUDE_API_KEY='your-api-key-here'
+   echo "export CLAUDE_API_KEY='your-api-key-here'" >> ~/.bashrc
    ```
 
 4. **Reload your shell**:
+   
+   **PowerShell:**
+   ```powershell
+   # Restart PowerShell or run:
+   . $PROFILE
+   ```
+   
+   **Bash:**
    ```bash
    source ~/.bashrc  # or ~/.zshrc on Mac
    ```
@@ -27,7 +51,7 @@ Your personal Claude Code configuration repository for maximizing productivity a
 ## 📁 Repository Structure
 
 ```
-claude-config/
+claudeops/
 ├── CLAUDE.md                 # Master instructions for Claude
 ├── settings/
 │   ├── global.json          # Cross-platform settings
@@ -49,13 +73,20 @@ claude-config/
 - `/mobile-scaffold` - Create Prism-based MAUI app structure
 - `/api-crud` - Generate complete CRUD API with tests
 - `/fix-and-test` - Intelligent debugging with xUnit test generation
+- `/context-prime` - Deep project analysis and understanding
+- `/tdd` - Guided Test-Driven Development workflow
+- `/create-docs` - Auto-generate comprehensive documentation
+- `/review-pr` - Systematic pull request review
+- `/refactor-safe` - Safe, incremental refactoring process
 
 ### Shell Aliases
-- `cc` - Quick Claude access
+- `cc` - Quick Claude access (project-aware)
 - `cct` - Claude with thinking mode
 - `ccpr` - Create PR with current changes
 - `ccfix` - Run fix-and-test command
 - `ccsync` - Sync configurations
+- `ccusage` - View usage statistics and ROI
+- `cc-init-project` - Initialize project with CLAUDE.md
 
 ### Development Standards
 - Prism framework for MAUI mobile apps
@@ -138,7 +169,7 @@ echo "export CLAUDE_API_KEY='your-actual-key'" >> ~/.bashrc
 
 ### Sync issues
 ```bash
-cd ~/.claude-config
+cd ~/claudeops
 git status
 git pull origin main
 ```

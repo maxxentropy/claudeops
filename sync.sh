@@ -5,8 +5,8 @@
 set -e
 
 # Configuration
-CLAUDE_CONFIG_REPO="${CLAUDE_CONFIG_REPO:-https://github.com/YOUR_USERNAME/claude-config.git}"
-CLAUDE_CONFIG_DIR="$HOME/.claude-config"
+CLAUDE_CONFIG_REPO="${CLAUDE_CONFIG_REPO:-https://github.com/YOUR_USERNAME/claudeops.git}"
+CLAUDE_CONFIG_DIR="$HOME/claudeops"
 CLAUDE_HOME="$HOME/.claude"
 
 # Colors for output
@@ -66,9 +66,13 @@ link_configs() {
     
     log_info "Detected OS: $os_type"
     
-    # Link CLAUDE.md
+    # Link CLAUDE.md (use CLAUDE-SYSTEM.md as the system-level config)
     log_info "Linking CLAUDE.md..."
-    ln -sf "$CLAUDE_CONFIG_DIR/CLAUDE.md" "$CLAUDE_HOME/CLAUDE.md"
+    if [ -f "$CLAUDE_CONFIG_DIR/CLAUDE-SYSTEM.md" ]; then
+        ln -sf "$CLAUDE_CONFIG_DIR/CLAUDE-SYSTEM.md" "$CLAUDE_HOME/CLAUDE.md"
+    else
+        ln -sf "$CLAUDE_CONFIG_DIR/CLAUDE.md" "$CLAUDE_HOME/CLAUDE.md"
+    fi
     
     # Link global settings
     log_info "Linking global settings..."
@@ -135,7 +139,7 @@ alias cchthr='claude think harder'
 alias ccu='claude ultrathink'
 alias ccpr='claude "Create a PR with all current changes"'
 alias ccfix='claude /fix-and-test'
-alias ccsync='~/.claude-config/sync.sh'
+alias ccsync='~/claudeops/sync.sh'
 alias cclog='tail -f ~/.claude/logs/claude.log'
 alias ccclear='claude /clear'
 

@@ -2,14 +2,22 @@
 # Add this to your PowerShell profile: notepad $PROFILE
 
 # Claude Code Aliases
-Set-Alias cc claude
+# cc is now a function defined below for project awareness
 function cct { claude think }
 function ccth { claude "think hard" }
 function cchthr { claude "think harder" }
 function ccu { claude ultrathink }
 function ccpr { claude "Create a PR with all current changes" }
 function ccfix { claude /fix-and-test }
-function ccsync { ~/.claude-config/sync.sh }
+function ccsync { 
+    $syncScript = Join-Path $HOME "claudeops/sync.ps1"
+    if (Test-Path $syncScript) {
+        & $syncScript
+    } else {
+        # Fallback to bash script if on Unix-like system
+        bash (Join-Path $HOME "claudeops/sync.sh")
+    }
+}
 function ccclear { claude /clear }
 
 # Claude Quick Commands
@@ -47,7 +55,7 @@ function gb { git branch }
 
 # Navigation helpers
 function repos { Set-Location "C:\Users\sean_\source\repos" }
-function claude-config { Set-Location "~/.claude-config" }
+function claudeops { Set-Location "C:\Users\sean_\source\repos\claudeops" }
 
 # Project specific
 function run-android { dotnet build -t:Run -f net8.0-android }
@@ -87,7 +95,7 @@ function Check-ClaudeSetup {
     }
     
     # Check config directory
-    if (Test-Path "~/.claude-config") {
+    if (Test-Path "~/claudeops") {
         Write-Host "✓ Claude config directory exists" -ForegroundColor Green
     } else {
         Write-Host "✗ Claude config directory not found" -ForegroundColor Red
@@ -95,11 +103,59 @@ function Check-ClaudeSetup {
     }
 }
 
+# Project-aware Claude function
+function cc {
+    param([Parameter(ValueFromRemainingArguments=$true)]$args)
+    
+    # Check if we're in a project with its own CLAUDE.md
+    if (Test-Path "./CLAUDE.md") {
+        Write-Host "Using project-specific CLAUDE.md" -ForegroundColor Green
+    } else {
+        Write-Host "Using system-level configuration" -ForegroundColor Cyan
+    }
+    
+    # Run claude with all arguments
+    & claude $args
+}
+
+# Initialize new project with Claude support
+function cc-init-project {
+    param([string]$projectType = "generic")
+    
+    if (Test-Path "./CLAUDE.md") {
+        Write-Host "CLAUDE.md already exists in this project" -ForegroundColor Yellow
+        return
+    }
+    
+    $templatePath = Join-Path $HOME "claudeops/templates/CLAUDE-PROJECT.md"
+    
+    if (Test-Path $templatePath) {
+        Copy-Item $templatePath "./CLAUDE.md"
+        Write-Host "Created CLAUDE.md for this project" -ForegroundColor Green
+        Write-Host "Edit ./CLAUDE.md to customize project-specific settings" -ForegroundColor Cyan
+    } else {
+        Write-Host "Template not found at $templatePath" -ForegroundColor Red
+    }
+}
+
+# Usage tracking
+function ccusage {
+    param([string]$Period = "month", [switch]$Detailed, [switch]$Export)
+    $usageScript = Join-Path $HOME "claudeops/commands/shared/ccusage.ps1"
+    if (Test-Path $usageScript) {
+        & $usageScript -Period $Period -Detailed:$Detailed -Export:$Export
+    } else {
+        Write-Host "Usage tracking script not found at: $usageScript" -ForegroundColor Red
+    }
+}
+
 # Show Claude shortcuts on startup
 Write-Host "Claude Code shortcuts loaded! Key commands:" -ForegroundColor Cyan
-Write-Host "  cc       - Run Claude" -ForegroundColor White
+Write-Host "  cc              - Run Claude (project-aware)" -ForegroundColor White
+Write-Host "  cc-init-project - Create project CLAUDE.md" -ForegroundColor White
 Write-Host "  cct      - Claude with thinking" -ForegroundColor White
 Write-Host "  ccfix    - Fix and test code" -ForegroundColor White
 Write-Host "  ccpr     - Create pull request" -ForegroundColor White
 Write-Host "  ccsync   - Sync configurations" -ForegroundColor White
+Write-Host "  ccusage  - View usage statistics" -ForegroundColor White
 Write-Host "Run Check-ClaudeSetup to verify installation" -ForegroundColor Gray
