@@ -6,7 +6,7 @@ Your personal Claude Code configuration repository for maximizing productivity a
 
 1. **Clone this repository**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/claudeops.git ~/claudeops
+   git clone git@github.com:maxxentropy/claudeops.git ~/claudeops
    ```
 
 2. **Run the sync script**:

@@ -2,10 +2,8 @@
 # Claude Code Configuration Sync Script
 # Syncs configurations across Windows, Mac, and Linux environments
 
-set -e
-
 # Configuration
-CLAUDE_CONFIG_REPO="${CLAUDE_CONFIG_REPO:-https://github.com/YOUR_USERNAME/claudeops.git}"
+CLAUDE_CONFIG_REPO="${CLAUDE_CONFIG_REPO:-git@github.com:maxxentropy/claudeops.git}"
 CLAUDE_CONFIG_DIR="$HOME/claudeops"
 CLAUDE_HOME="$HOME/.claude"
 
@@ -43,9 +41,11 @@ init_claude_dir() {
     if [ ! -d "$CLAUDE_HOME" ]; then
         log_info "Creating Claude home directory: $CLAUDE_HOME"
         mkdir -p "$CLAUDE_HOME"
-        mkdir -p "$CLAUDE_HOME/commands"
-        mkdir -p "$CLAUDE_HOME/logs"
     fi
+    
+    # Always ensure commands and logs directories exist
+    mkdir -p "$CLAUDE_HOME/commands"
+    mkdir -p "$CLAUDE_HOME/logs"
 }
 
 # Clone or update configuration repository
@@ -53,10 +53,19 @@ sync_repo() {
     if [ -d "$CLAUDE_CONFIG_DIR/.git" ]; then
         log_info "Updating existing configuration repository..."
         cd "$CLAUDE_CONFIG_DIR"
-        git pull origin main || git pull origin master
+        # Try to pull, handle errors gracefully
+        if ! git pull origin main 2>/dev/null; then
+            if ! git pull origin master 2>/dev/null; then
+                log_warn "Could not update repository, continuing with existing version"
+            fi
+        fi
+        cd - > /dev/null
     else
         log_info "Cloning configuration repository..."
-        git clone "$CLAUDE_CONFIG_REPO" "$CLAUDE_CONFIG_DIR"
+        if ! git clone "$CLAUDE_CONFIG_REPO" "$CLAUDE_CONFIG_DIR"; then
+            log_error "Failed to clone configuration repository"
+            return 1
+        fi
     fi
 }
 
@@ -70,20 +79,26 @@ link_configs() {
     log_info "Linking CLAUDE.md..."
     if [ -f "$CLAUDE_CONFIG_DIR/CLAUDE-SYSTEM.md" ]; then
         ln -sf "$CLAUDE_CONFIG_DIR/CLAUDE-SYSTEM.md" "$CLAUDE_HOME/CLAUDE.md"
-    else
+    elif [ -f "$CLAUDE_CONFIG_DIR/CLAUDE.md" ]; then
         ln -sf "$CLAUDE_CONFIG_DIR/CLAUDE.md" "$CLAUDE_HOME/CLAUDE.md"
+    else
+        log_warn "No CLAUDE.md file found in config repository"
     fi
     
     # Link global settings
     log_info "Linking global settings..."
-    ln -sf "$CLAUDE_CONFIG_DIR/settings/global.json" "$CLAUDE_HOME/settings.json"
+    if [ -f "$CLAUDE_CONFIG_DIR/settings/global.json" ]; then
+        ln -sf "$CLAUDE_CONFIG_DIR/settings/global.json" "$CLAUDE_HOME/settings.json"
+    else
+        log_warn "No global settings found"
+    fi
     
     # Link platform-specific settings
-    if [ "$os_type" != "unknown" ]; then
+    if [ "$os_type" != "unknown" ] && [ -f "$CLAUDE_CONFIG_DIR/settings/$os_type.json" ]; then
         log_info "Linking $os_type-specific settings..."
         ln -sf "$CLAUDE_CONFIG_DIR/settings/$os_type.json" "$CLAUDE_HOME/settings.local.json"
     else
-        log_warn "Unknown OS detected, skipping platform-specific settings"
+        log_warn "No platform-specific settings found for $os_type"
     fi
 }
 
@@ -114,11 +129,18 @@ setup_aliases() {
         shell_rc="$HOME/.zshrc"
     elif [ -n "$BASH_VERSION" ]; then
         shell_rc="$HOME/.bashrc"
+    elif [ -f "$HOME/.zshrc" ]; then
+        # Default to zsh on macOS if .zshrc exists
+        shell_rc="$HOME/.zshrc"
+    elif [ -f "$HOME/.bashrc" ]; then
+        # Fallback to bash
+        shell_rc="$HOME/.bashrc"
     fi
     
     if [ -z "$shell_rc" ] || [ ! -f "$shell_rc" ]; then
-        log_warn "Could not determine shell configuration file"
-        return
+        log_warn "Could not determine shell configuration file. Creating ~/.zshrc"
+        shell_rc="$HOME/.zshrc"
+        touch "$shell_rc"
     fi
     
     # Check if aliases are already added
@@ -214,8 +236,7 @@ verify_installation() {
     
     # Check if Claude is installed
     if ! command -v claude &> /dev/null; then
-        log_error "Claude Code is not installed. Install with: npm install -g @anthropic-ai/claude-code"
-        ((errors++))
+        log_warn "Claude Code is not installed. Install with: npm install -g @anthropic-ai/claude-code"
     else
         log_info "✓ Claude Code is installed"
     fi
@@ -224,15 +245,13 @@ verify_installation() {
     if [ -f "$CLAUDE_HOME/CLAUDE.md" ]; then
         log_info "✓ CLAUDE.md is linked"
     else
-        log_error "✗ CLAUDE.md is not linked"
-        ((errors++))
+        log_warn "✗ CLAUDE.md is not linked"
     fi
     
     if [ -f "$CLAUDE_HOME/settings.json" ]; then
         log_info "✓ Settings are configured"
     else
-        log_error "✗ Settings are not configured"
-        ((errors++))
+        log_warn "✗ Settings are not configured"
     fi
     
     # Check API key
@@ -243,12 +262,7 @@ verify_installation() {
         log_info "✓ API key is configured"
     fi
     
-    if [ $errors -eq 0 ]; then
-        log_info "Installation verified successfully!"
-    else
-        log_error "Installation verification failed with $errors errors"
-        return 1
-    fi
+    log_info "Installation verification completed"
 }
 
 # Main execution

@@ -5,7 +5,7 @@
 $ErrorActionPreference = "Stop"
 
 # Configuration
-$CLAUDE_CONFIG_REPO = if ($env:CLAUDE_CONFIG_REPO) { $env:CLAUDE_CONFIG_REPO } else { "https://github.com/YOUR_USERNAME/claudeops.git" }
+$CLAUDE_CONFIG_REPO = if ($env:CLAUDE_CONFIG_REPO) { $env:CLAUDE_CONFIG_REPO } else { "git@github.com:maxxentropy/claudeops.git" }
 $CLAUDE_CONFIG_DIR = Join-Path $HOME "claudeops"
 $CLAUDE_HOME = Join-Path $HOME ".claude"
 
