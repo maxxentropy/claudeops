@@ -1,0 +1,28 @@
+{
+  "shell": "zsh",
+  "terminal": "iTerm2",
+  "paths": {
+    "visualStudio": "/Applications/Visual Studio.app",
+    "rider": "/Applications/Rider.app",
+    "dotnet": "/usr/local/share/dotnet/dotnet"
+  },
+  "environment": {
+    "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
+    "NUGET_PACKAGES": "~/.nuget/packages",
+    "PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet"
+  },
+  "gitConfig": {
+    "core.autocrlf": "input",
+    "core.editor": "code --wait"
+  },
+  "aliases": {
+    "vs": "open -a 'Visual Studio'",
+    "rider": "open -a Rider",
+    "build": "dotnet build",
+    "test": "dotnet test"
+  },
+  "iosDevTools": {
+    "simulator": "xcrun simctl",
+    "devices": "xcrun xctrace list devices"
+  }
+}

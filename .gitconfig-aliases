@@ -1,0 +1,56 @@
+[alias]
+    # Claude Code specific aliases
+    cc-commit = !claude "Review staged changes and create a commit with a descriptive message"
+    cc-pr = !claude "Create a pull request with all current changes"
+    cc-review = !claude "Review the current branch changes for code quality, bugs, and best practices"
+    cc-fix = !claude "/fix-and-test"
+    cc-test = !claude "Generate comprehensive xUnit tests for recent changes"
+    cc-refactor = !claude "Refactor this code for better maintainability and performance"
+    
+    # Standard Git workflow aliases
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    df = diff
+    dfs = diff --staged
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    
+    # Branch management
+    branches = branch -a
+    remotes = remote -v
+    tags = tag -l
+    
+    # Stash operations
+    sl = stash list
+    sp = stash pop
+    ss = stash save
+    
+    # Advanced operations
+    undo = reset HEAD~1 --mixed
+    amend = commit --amend
+    rebase-i = rebase -i
+    cherry = cherry-pick
+    
+    # Cleanup
+    cleanup = !git branch --merged | grep -v '\\*\\|master\\|main\\|develop' | xargs -n 1 git branch -d
+    prune-branches = remote prune origin
+    
+    # Info aliases
+    contributors = shortlog --summary --numbered
+    file-history = log --follow -p --
+    branch-history = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+    
+    # Workflow helpers
+    feature = !git checkout -b feature/$1
+    bugfix = !git checkout -b bugfix/$1
+    hotfix = !git checkout -b hotfix/$1
+    
+    # Sync helpers
+    sync = !git fetch --all && git pull origin $(git branch --show-current)
+    push-upstream = !git push -u origin $(git branch --show-current)
+    
+    # Claude-enhanced workflows
+    smart-commit = !git add -A && claude "Review all changes and commit with appropriate conventional commit message"
+    smart-merge = !claude "Review the merge conflicts and help resolve them"
+    smart-rebase = !claude "Help me rebase this branch onto main/master"

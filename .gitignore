@@ -1,0 +1,62 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# API Keys and secrets
+*.key
+*.pem
+*.pfx
+*_key
+*_secret
+api_key.txt
+secrets.json
+
+# Local settings that shouldn't be shared
+settings.local.json
+CLAUDE.local.md
+*.local.*
+
+# Logs and temporary files
+logs/
+*.log
+tmp/
+temp/
+*.tmp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build outputs
+build/
+dist/
+out/
+bin/
+obj/
+
+# Node modules (if any custom tools)
+node_modules/
+
+# Python (if any scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Personal notes
+personal-notes.md
+TODO.personal.md
+scratch/
