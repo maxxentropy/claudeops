@@ -1,0 +1,20 @@
+[
+  {
+    "content": "Rename claude-config directory to claudeops",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Update all references from claude-config to claudeops",
+    "status": "in_progress",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Update Git repository with new name",
+    "status": "pending",
+    "priority": "high",
+    "id": "3"
+  }
+]

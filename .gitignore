@@ -11,6 +11,7 @@
 *_secret
 api_key.txt
 secrets.json
+.credentials.json
 
 # Local settings that shouldn't be shared
 settings.local.json

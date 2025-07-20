@@ -1,0 +1,44 @@
+[
+  {
+    "content": "Load Phase 4 specifications and previous artifacts",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Implement /learn command for knowledge capture",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Implement /metrics command with dashboard",
+    "status": "completed",
+    "priority": "high",
+    "id": "3"
+  },
+  {
+    "content": "Implement /suggest command for pattern recommendations",
+    "status": "in_progress",
+    "priority": "high",
+    "id": "4"
+  },
+  {
+    "content": "Implement /history command for audit trail",
+    "status": "pending",
+    "priority": "high",
+    "id": "5"
+  },
+  {
+    "content": "Write tests and documentation",
+    "status": "pending",
+    "priority": "high",
+    "id": "6"
+  },
+  {
+    "content": "Update PRD tracker with Phase 4 progress",
+    "status": "pending",
+    "priority": "high",
+    "id": "7"
+  }
+]

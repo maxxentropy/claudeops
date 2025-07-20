@@ -1,0 +1,14 @@
+[
+  {
+    "content": "Create appropriate directory structure for specs and PRD files",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Create claude.md file from the existing content",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  }
+]
