@@ -1,0 +1,31 @@
+#!/bin/sh
+# Commit message hook - ensures proper format and adds verification badge
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# Check if message follows conventional commit format
+if ! echo "$COMMIT_MSG" | grep -qE "^(feat|fix|refactor|docs|test|perf|chore|build|ci|style|revert)(\(.+\))?: .+"; then
+    echo "❌ Commit message must follow conventional format:"
+    echo "   <type>(<scope>)?: <subject>"
+    echo ""
+    echo "Types: feat, fix, refactor, docs, test, perf, chore, build, ci, style, revert"
+    echo ""
+    echo "Examples:"
+    echo "   feat: Add user authentication"
+    echo "   fix(auth): Resolve login timeout issue"
+    echo "   refactor: Extract email validation logic"
+    exit 1
+fi
+
+# Add verification badge if not already present and not a WIP commit
+if ! grep -q "\[✓ VERIFIED\]" "$COMMIT_MSG_FILE" && ! echo "$COMMIT_MSG" | grep -iq "wip"; then
+    # Check if pre-commit verification passed (file created by pre-commit hook)
+    if [ -f ".git/VERIFICATION_PASSED" ]; then
+        echo "" >> "$COMMIT_MSG_FILE"
+        echo "[✓ VERIFIED]" >> "$COMMIT_MSG_FILE"
+        rm -f ".git/VERIFICATION_PASSED"
+    fi
+fi
+
+exit 0

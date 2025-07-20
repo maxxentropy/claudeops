@@ -1,0 +1,36 @@
+#!/bin/sh
+# Pre-commit hook - runs quick verification on changed files
+
+# Get the directory of this script
+HOOK_DIR="$(dirname "$0")"
+REPO_DIR="$(dirname "$(dirname "$HOOK_DIR")")"
+
+# Determine which verification script to use
+if command -v powershell >/dev/null 2>&1; then
+    # Windows with PowerShell
+    powershell -ExecutionPolicy Bypass -File "$REPO_DIR/scripts/verify-changes.ps1"
+elif [ -f "$REPO_DIR/scripts/verify-changes.sh" ]; then
+    # Unix-like with bash script
+    "$REPO_DIR/scripts/verify-changes.sh"
+else
+    # Fallback: basic verification
+    echo "Running basic verification..."
+    
+    # Check for common issues
+    git diff --cached --name-only | while read file; do
+        # Check for debugging code
+        if grep -E "(console\.log|debugger|TODO:|FIXME:|XXX:)" "$file" 2>/dev/null; then
+            echo "❌ Found debugging code or TODOs in $file"
+            exit 1
+        fi
+    done
+fi
+
+EXIT_CODE=$?
+
+# If verification passed, create a flag file for commit-msg hook
+if [ $EXIT_CODE -eq 0 ]; then
+    touch .git/VERIFICATION_PASSED
+fi
+
+exit $EXIT_CODE

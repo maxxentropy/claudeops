@@ -541,6 +541,57 @@ if [ "$(uname -s)" = *"MINGW"* ] || [ "$(uname -s)" = *"MSYS"* ]; then
     alias claude='claude.exe 2>/dev/null || claude'
 fi
 
+# Git investigation aliases and functions
+git-investigate() {
+    local file="$1"
+    local lines="${2:-10}"
+    echo -e "\n${GREEN}Investigating $file...${NC}"
+    echo -e "\n${YELLOW}Recent commits:${NC}"
+    git log --oneline -n "$lines" -- "$file"
+    echo -e "\n${YELLOW}Press Enter to see detailed changes...${NC}"
+    read
+    git log -p -n 5 -- "$file"
+}
+
+git-search() {
+    local pattern="$1"
+    local path="${2:-.}"
+    echo -e "${GREEN}Searching for '$pattern' in commit history...${NC}"
+    git log --all --grep="$pattern" --oneline
+    echo -e "\n${GREEN}Searching in code changes...${NC}"
+    git log -p -S "$pattern" --oneline "$path"
+}
+
+git-why() {
+    local file="$1"
+    local line="$2"
+    if [ -n "$line" ]; then
+        git blame -L "$line,$line" "$file"
+    else
+        git blame "$file" | less
+    fi
+}
+
+git-context() {
+    local file="${1:-.}"
+    echo -e "${GREEN}Recent activity summary:${NC}"
+    git log --since="2 weeks ago" --oneline --graph "$file"
+    echo -e "\n${GREEN}Active contributors:${NC}"
+    git shortlog -sn --since="1 month ago" "$file"
+    echo -e "\n${GREEN}Recent fixes:${NC}"
+    git log --grep="^fix:" --oneline -10 "$file"
+}
+
+# Short aliases
+alias gi='git-investigate'
+alias gsearch='git-search'
+alias gwhy='git-why'
+alias gcontext='git-context'
+
+# Development workflow helpers
+alias verify='$HOME/claudeops/scripts/verify-changes.sh'
+alias qc='$HOME/claudeops/scripts/quick-commit.sh'
+
 EOF
     
     log_info "Aliases added. Run 'source $shell_rc' to apply them immediately"

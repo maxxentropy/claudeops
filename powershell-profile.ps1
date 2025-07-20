@@ -149,6 +149,77 @@ function ccusage {
     }
 }
 
+# Git investigation commands
+function git-investigate {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$file,
+        [int]$lines = 10
+    )
+    Write-Host "`nInvestigating $file..." -ForegroundColor Cyan
+    Write-Host "`nRecent commits:" -ForegroundColor Yellow
+    git log --oneline -n $lines -- $file
+    
+    Write-Host "`nPress any key to see detailed changes..." -ForegroundColor Gray
+    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    
+    git log -p -n 5 -- $file
+}
+
+function git-search {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$pattern,
+        [string]$path = "."
+    )
+    Write-Host "Searching for '$pattern' in commit history..." -ForegroundColor Cyan
+    git log --all --grep="$pattern" --oneline
+    
+    Write-Host "`nSearching in code changes..." -ForegroundColor Cyan
+    git log -p -S "$pattern" --oneline $path
+}
+
+function git-why {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$file,
+        [int]$line
+    )
+    if ($line) {
+        git blame -L $line,$line $file
+    } else {
+        git blame $file | Out-Host -Paging
+    }
+}
+
+function git-context {
+    param([string]$file = ".")
+    Write-Host "Recent activity summary:" -ForegroundColor Cyan
+    git log --since="2 weeks ago" --oneline --graph $file
+    
+    Write-Host "`nActive contributors:" -ForegroundColor Cyan
+    git shortlog -sn --since="1 month ago" $file
+    
+    Write-Host "`nRecent fixes:" -ForegroundColor Cyan
+    git log --grep="^fix:" --oneline -10 $file
+}
+
+# Git aliases for investigation
+Set-Alias gi git-investigate
+Set-Alias gsearch git-search
+Set-Alias gwhy git-why
+Set-Alias gcontext git-context
+
+# Quick verification and commit helpers
+function qc {
+    param([Parameter(Mandatory=$true)][string]$Message)
+    & "$HOME/claudeops/scripts/quick-commit.ps1" -Message $Message
+}
+
+function verify {
+    & "$HOME/claudeops/scripts/verify-changes.ps1"
+}
+
 # Show Claude shortcuts on startup
 Write-Host "Claude Code shortcuts loaded! Key commands:" -ForegroundColor Cyan
 Write-Host "  cc              - Run Claude (project-aware)" -ForegroundColor White
@@ -158,4 +229,12 @@ Write-Host "  ccfix    - Fix and test code" -ForegroundColor White
 Write-Host "  ccpr     - Create pull request" -ForegroundColor White
 Write-Host "  ccsync   - Sync configurations" -ForegroundColor White
 Write-Host "  ccusage  - View usage statistics" -ForegroundColor White
+Write-Host "`nGit investigation commands:" -ForegroundColor Cyan
+Write-Host "  gi <file>       - Investigate file history" -ForegroundColor White
+Write-Host "  gsearch <text>  - Search commits and code" -ForegroundColor White
+Write-Host "  gwhy <file>     - Show who changed what (blame)" -ForegroundColor White
+Write-Host "  gcontext        - Show recent activity context" -ForegroundColor White
+Write-Host "`nDevelopment workflow:" -ForegroundColor Cyan
+Write-Host "  verify          - Quick verify changed files" -ForegroundColor White
+Write-Host "  qc <msg>        - Quick commit with verification" -ForegroundColor White
 Write-Host "Run Check-ClaudeSetup to verify installation" -ForegroundColor Gray

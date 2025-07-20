@@ -88,10 +88,20 @@ claudeops/
 - `ccusage` - View usage statistics and ROI
 - `cc-init-project` - Initialize project with CLAUDE.md
 
+### Git Investigation Commands
+- `gi <file>` - Investigate file history interactively
+- `gsearch <pattern>` - Search commits and code changes
+- `gwhy <file> [line]` - Show who changed what (enhanced blame)
+- `gcontext [path]` - Show recent activity and contributors
+
+### Development Workflow Commands
+- `verify` - Quick verification of changed files only
+- `qc "msg"` - Quick commit with auto-verification
+
 ### Development Standards
 - Prism framework for MAUI mobile apps
 - xUnit for all testing
-- Conventional commits
+- Conventional commits with auto-verification
 - Platform-specific optimizations
 
 ## 💻 Platform Setup
@@ -153,6 +163,45 @@ Based on typical usage:
 - Value at $100/hour: $2,000
 - Monthly cost: $100
 - **ROI: 2000%**
+
+## 🔄 Daily Development Workflow
+
+Once setup is complete, use these commands for efficient development:
+
+### Quick Commands
+```bash
+# Before starting work - check recent changes
+gi <file>          # Investigate file history
+gcontext           # See recent activity
+
+# While coding
+verify             # Quick check of your changes (30 seconds)
+
+# Ready to commit  
+qc "fix: description"  # Auto-verify and commit with proper format
+
+# Or manually
+git add .
+git commit -m "feat: add new feature"  # Hooks auto-verify
+```
+
+### The 3-Stage Workflow
+1. **Rapid feedback** (during coding): `dotnet watch test` or `npm run test:watch`
+2. **Pre-commit** (before committing): `verify` - checks only changed files
+3. **Full verification** (before PR): Run complete test suite
+
+## 🎯 Optional: Git Hooks Setup
+
+For automatic verification on every commit:
+```bash
+# One-time setup
+./scripts/install-hooks.ps1  # Windows
+./scripts/install-hooks.sh   # Mac/Linux
+```
+
+This installs:
+- **pre-commit**: Runs `verify` automatically
+- **commit-msg**: Ensures proper format, adds [✓ VERIFIED] badge
 
 ## 🆘 Troubleshooting
 
