@@ -1,0 +1,65 @@
+[alias]
+    # Claude Code slash command aliases
+    # Commands using new scheme (personas + principles)
+    cc-commit = !claude "/commit"
+    cc-fix = !claude "/fix"
+    cc-test = !claude "/test"
+    cc-safe = !claude "/safe"
+    
+    # Commands still using old style (functional but need migration)
+    cc-review = !claude "/review-pr"
+    cc-refactor = !claude "/refactor-safe"
+    cc-investigate = !claude "/git-investigate"
+    cc-tdd = !claude "/tdd"
+    cc-docs = !claude "/create-docs"
+    
+    # Plain text prompts (no slash command exists yet)
+    cc-pr = !claude "Create a pull request with all current changes"
+    
+    # Standard Git workflow aliases
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    df = diff
+    dfs = diff --staged
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    
+    # Branch management
+    branches = branch -a
+    remotes = remote -v
+    tags = tag -l
+    
+    # Stash operations
+    sl = stash list
+    sp = stash pop
+    ss = stash save
+    
+    # Advanced operations
+    undo = reset HEAD~1 --mixed
+    amend = commit --amend
+    rebase-i = rebase -i
+    cherry = cherry-pick
+    
+    # Cleanup
+    cleanup = !git branch --merged | grep -v '\\*\\|master\\|main\\|develop' | xargs -n 1 git branch -d
+    prune-branches = remote prune origin
+    
+    # Info aliases
+    contributors = shortlog --summary --numbered
+    file-history = log --follow -p --
+    branch-history = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+    
+    # Workflow helpers
+    feature = !git checkout -b feature/$1
+    bugfix = !git checkout -b bugfix/$1
+    hotfix = !git checkout -b hotfix/$1
+    
+    # Sync helpers
+    sync = !git fetch --all && git pull origin $(git branch --show-current)
+    push-upstream = !git push -u origin $(git branch --show-current)
+    
+    # Claude-enhanced workflows
+    smart-commit = !git add -A && claude "/commit"
+    smart-merge = !claude "Review the merge conflicts and help resolve them"
+    smart-rebase = !claude "Help me rebase this branch onto main/master"

@@ -18,6 +18,18 @@ settings.local.json
 CLAUDE.local.md
 *.local.*
 
+# User data (never commit)
+data/conversations/*
+data/workspaces/*
+data/todos/*
+data/logs/*
+!data/**/.gitkeep
+
+# Cache files
+cache/shell-snapshots/*
+cache/statsig/*
+!cache/**/.gitkeep
+
 # Logs and temporary files
 logs/
 *.log
