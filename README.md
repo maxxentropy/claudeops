@@ -4,18 +4,45 @@ Drop-dead simple Claude Code configuration with embedded workflows that ensure p
 
 ## 🚀 Installation (30 seconds)
 
-### Option 1: Direct Clone (Recommended)
+### macOS / Linux
+
+#### Option 1: Direct Clone (Recommended)
 ```bash
+# Remove existing configuration if present
+rm -rf ~/.claude
+
 # Clone directly as your Claude configuration
 git clone https://github.com/maxxentropy/claudeops ~/.claude
+
+# Make scripts executable (Linux/macOS)
+chmod +x ~/.claude/system/scripts/*.sh
 ```
 
-### Option 2: Traditional Install
+#### Option 2: Traditional Install
 ```bash
-# Clone and install
+# Clone anywhere
 git clone https://github.com/maxxentropy/claudeops
 cd claudeops
+
+# Run installer
 ./install.sh
+```
+
+### Windows
+
+#### PowerShell
+```powershell
+# Remove existing configuration if present
+Remove-Item -Recurse -Force "$env:USERPROFILE\.claude" -ErrorAction SilentlyContinue
+
+# Clone directly
+git clone https://github.com/maxxentropy/claudeops "$env:USERPROFILE\.claude"
+```
+
+#### Git Bash
+```bash
+# Same as macOS/Linux
+git clone https://github.com/maxxentropy/claudeops ~/.claude
 ```
 
 That's it! Your slash commands are ready to use.
@@ -73,17 +100,57 @@ claudeops/
 
 ## 🛠️ Configuration
 
-### Git Aliases
+### Git Aliases (All Platforms)
 Add to your `.gitconfig`:
 ```ini
 [include]
     path = ~/.claude/config/gitconfig-aliases
 ```
 
-### PowerShell
+### Shell Integration
+
+#### macOS / Linux (Bash)
+Add to your `~/.bashrc` or `~/.bash_profile`:
+```bash
+# Claude Code aliases and functions
+if [ -f ~/.claude/scripts/shell-integration/bash-profile.sh ]; then
+    . ~/.claude/scripts/shell-integration/bash-profile.sh
+fi
+```
+
+#### macOS / Linux (Zsh)
+Add to your `~/.zshrc`:
+```zsh
+# Claude Code aliases and functions
+if [ -f ~/.claude/scripts/shell-integration/zsh-profile.sh ]; then
+    . ~/.claude/scripts/shell-integration/zsh-profile.sh
+fi
+```
+
+#### Windows (PowerShell)
+Add to your PowerShell profile:
 ```powershell
-# Add to your profile
-. ~/.claude/scripts/shell-integration/powershell-profile.ps1
+# Find your profile location
+echo $PROFILE
+
+# Add this line to the profile
+. "$env:USERPROFILE\.claude\scripts\shell-integration\powershell-profile.ps1"
+```
+
+### Environment Variables (Optional)
+
+#### macOS / Linux
+Add to your shell profile:
+```bash
+export CLAUDE_API_KEY="your-api-key-here"
+export CLAUDE_MODEL="claude-3-opus-20240229"
+```
+
+#### Windows
+Set via PowerShell:
+```powershell
+[Environment]::SetEnvironmentVariable("CLAUDE_API_KEY", "your-api-key-here", "User")
+[Environment]::SetEnvironmentVariable("CLAUDE_MODEL", "claude-3-opus-20240229", "User")
 ```
 
 ## 📈 Results
@@ -113,6 +180,41 @@ Add to your `.gitconfig`:
 2. Create feature branch
 3. Add/improve commands
 4. Submit pull request
+
+## 🔍 Troubleshooting
+
+### Command Not Found
+If you get "claude: command not found":
+
+**macOS/Linux:**
+```bash
+# Check if claude is in PATH
+which claude
+
+# If not found, add to PATH
+export PATH="$PATH:/path/to/claude"
+```
+
+**Windows:**
+```powershell
+# Check if claude is available
+where.exe claude
+
+# If not found, install via the official installer
+```
+
+### Permission Denied
+**macOS/Linux:**
+```bash
+# Fix script permissions
+chmod +x ~/.claude/system/scripts/*.sh
+chmod +x ~/.claude/install.sh
+```
+
+### Slash Commands Not Working
+1. Ensure you're using the latest Claude Code version
+2. Check that ~/.claude exists and contains the commands
+3. Try running: `claude /safe 'echo test'`
 
 ## 📄 License
 
