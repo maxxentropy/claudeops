@@ -100,9 +100,19 @@ claude_code_cli:
   last_checked: "2025-01-20"
   
 claude_api:
-  model_version: "claude-3-opus-20240229"
-  api_version: "2023-06-01"
+  model_version: "claude-opus-4-20250514"
+  api_version: "2025-05-14"
   last_checked: "2025-01-20"
+  
+available_models:
+  claude_4:
+    - claude-opus-4-20250514  # Most capable, $15/$75 per M tokens
+    - claude-sonnet-4-20250514  # Balanced, $3/$15 per M tokens
+  claude_3_7:
+    - claude-3-7-sonnet-20250219  # Latest 3.7 version
+  claude_3_5:
+    - claude-3-5-sonnet-20241022
+    - claude-3-5-haiku-20241022  # Fastest, most efficient
   
 hooks_api:
   format_version: "v2"  # Array format with matchers

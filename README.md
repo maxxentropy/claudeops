@@ -143,14 +143,14 @@ echo $PROFILE
 Add to your shell profile:
 ```bash
 export CLAUDE_API_KEY="your-api-key-here"
-export CLAUDE_MODEL="claude-3-opus-20240229"
+export CLAUDE_MODEL="claude-opus-4-20250514"
 ```
 
 #### Windows
 Set via PowerShell:
 ```powershell
 [Environment]::SetEnvironmentVariable("CLAUDE_API_KEY", "your-api-key-here", "User")
-[Environment]::SetEnvironmentVariable("CLAUDE_MODEL", "claude-3-opus-20240229", "User")
+[Environment]::SetEnvironmentVariable("CLAUDE_MODEL", "claude-opus-4-20250514", "User")
 ```
 
 ## 📈 Results
