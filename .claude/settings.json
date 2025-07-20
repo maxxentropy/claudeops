@@ -1,0 +1,54 @@
+{
+  "model": "claude-3-opus-20240229",
+  "includeCoAuthoredBy": true,
+  "cleanupPeriodDays": 30,
+  "env": {
+    "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
+    "NODE_ENV": "development"
+  },
+  "permissions": {
+    "tools": {
+      "Bash": "auto",
+      "Edit": "auto",
+      "Write": "auto",
+      "WebFetch": "ask"
+    }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Executing bash command...'",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "dotnet format --verify-no-changes || true",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Processing request...'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
