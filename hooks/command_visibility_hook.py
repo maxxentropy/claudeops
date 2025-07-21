@@ -197,19 +197,46 @@ def process_prompt(input_data: Dict, commands_dir: Path = None) -> Optional[Dict
 def main():
     """
     Main entry point for the hook.
-    Reads JSON from stdin, processes, writes JSON to stdout.
+    Reads JSON from stdin, prints visibility header to stdout.
     """
     try:
         # Read JSON input from stdin
         input_data = json.load(sys.stdin)
         
-        # Process the prompt
-        result = process_prompt(input_data)
+        prompt = input_data.get('prompt', '').strip()
         
-        # If we have modifications, output them
-        if result:
-            print(json.dumps(result))
-        # Otherwise, no output means pass through unchanged
+        # Only process if it starts with a slash
+        if not prompt.startswith('/'):
+            return
+        
+        # Extract command name
+        parts = prompt.split()
+        if not parts or len(parts[0]) <= 1:
+            return
+        
+        command_name = parts[0][1:].lower()
+        
+        # Find command file
+        command_file = find_command_file(command_name)
+        if not command_file:
+            return
+        
+        try:
+            # Read command content
+            content = command_file.read_text(encoding='utf-8')
+            
+            # Extract information
+            personas = extract_personas(content)
+            workflow = extract_workflow_description(command_name, content)
+            
+            # Create and print header directly to stdout
+            # This will appear as hook output in Claude Code
+            header = format_command_header(command_name, workflow, personas)
+            print(header.strip())
+            
+        except Exception:
+            # On any error, stay silent
+            pass
             
     except Exception:
         # On error, allow through (fail open)
