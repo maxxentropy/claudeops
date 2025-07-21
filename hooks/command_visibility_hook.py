@@ -242,10 +242,12 @@ def main():
             personas = extract_personas(content)
             workflow = extract_workflow_description(command_name, content)
             
-            # Create and print header directly to stdout
-            # This will appear as hook output in Claude Code
+            # Create and print header to stderr with exit code 2
+            # This makes it visible to the user in the UI
             header = format_command_header(command_name, workflow, personas)
-            print(header.strip())
+            print(header.strip(), file=sys.stderr)
+            # Exit with code 2 to show stderr to user
+            sys.exit(2)
             
         except Exception:
             # On any error, stay silent
