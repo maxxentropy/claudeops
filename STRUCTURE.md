@@ -44,10 +44,10 @@ claudeops/ (repo) → ~/.claude/ (installed)
 │       ├── track-usage.js       # Usage tracking
 │       └── ccusage.ps1          # Usage analysis
 │
-├── config/                       # Configuration files
-│   ├── CLAUDE.md                # User instructions (symlink)
-│   ├── settings.json            # Global settings (symlink)
-│   └── settings.local.json      # Platform settings (symlink)
+├── settings.json                # Global Claude Code settings
+├── config/                       # Additional configuration files
+│   ├── CLAUDE.md                # Project-specific instructions
+│   └── gitconfig-aliases        # Git command aliases
 │
 ├── data/                         # User-generated data
 │   ├── conversations/           # Chat histories
@@ -116,8 +116,9 @@ claudeops/ (repo) → ~/.claude/ (installed)
 ## Key Files
 
 ### Configuration
-- `config/CLAUDE.md` - Your personal Claude configuration
-- `config/settings.json` - Claude Code settings
+- `settings.json` - Global Claude Code settings (hooks, permissions, model)
+- `config/CLAUDE.md` - Project-specific Claude instructions
+- `config/gitconfig-aliases` - Git command aliases
 
 ### References
 - `system/personas.md` - Expert mindsets used by commands

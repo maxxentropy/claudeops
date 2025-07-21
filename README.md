@@ -92,13 +92,22 @@ claudeops/
 │   ├── personas.md    # Expert mindsets
 │   ├── principles.md  # Reusable workflows
 │   └── scripts/       # Utilities
-├── config/            # Configuration files
+├── config/            # Git aliases and project-specific CLAUDE.md
 ├── data/              # User data (gitignored)
 ├── cache/             # Temporary files
 └── docs/              # Documentation
 ```
 
 ## 🛠️ Configuration
+
+### Global Settings
+The `settings.json` file at the repository root (`~/.claude/settings.json`) contains your global Claude Code configuration including:
+- Model selection
+- Hook configurations for automated workflows
+- Tool permissions
+- Environment variables
+
+This file is automatically discovered by Claude Code when the repo is cloned to `~/.claude/`.
 
 ### Git Aliases (All Platforms)
 Add to your `.gitconfig`:

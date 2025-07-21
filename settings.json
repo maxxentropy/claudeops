@@ -1,6 +1,6 @@
 {
   "model": "claude-opus-4-20250514",
-  "includeCoAuthoredBy": true,
+  "includeCoAuthoredBy": false,
   "cleanupPeriodDays": 30,
   "env": {
     "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
@@ -46,7 +46,15 @@
             "type": "command",
             "command": "echo 'Processing request...'",
             "timeout": 5
-          }
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/slash_command_validator.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/command_visibility_hook.py"
+          }          
         ]
       }
     ]
