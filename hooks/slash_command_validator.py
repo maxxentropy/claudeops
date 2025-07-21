@@ -40,6 +40,14 @@ def find_available_commands(commands_dir: Path = None) -> List[str]:
         # Extract command name from filename
         command_name = md_file.stem
         commands.append(command_name)
+        
+        # Also add the path-based format (e.g., "core:commit" for commands/core/commit.md)
+        relative_path = md_file.relative_to(commands_dir)
+        if relative_path.parent != Path('.'):
+            # Has a subdirectory
+            path_parts = list(relative_path.parent.parts)
+            path_command = ':'.join(path_parts + [command_name])
+            commands.append(path_command)
     
     return sorted(list(set(commands)))
 

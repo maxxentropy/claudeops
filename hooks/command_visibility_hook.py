@@ -33,7 +33,20 @@ def find_command_file(command_name: str, commands_dir: Path = None) -> Optional[
     if not commands_dir.exists():
         return None
     
-    # Search for the command file
+    # Handle path-based format (e.g., "core:commit")
+    if ':' in command_name:
+        # Split into path parts
+        parts = command_name.split(':')
+        # Construct the path
+        command_path = commands_dir
+        for part in parts[:-1]:
+            command_path = command_path / part
+        command_path = command_path / f"{parts[-1]}.md"
+        
+        if command_path.exists():
+            return command_path
+    
+    # Search for the command file by name only
     for md_file in commands_dir.rglob("*.md"):
         if md_file.stem == command_name:
             return md_file
