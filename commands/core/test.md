@@ -1,5 +1,7 @@
 # /test - Generate Comprehensive Tests
 
+🎯 **COMMAND**: /test | 📋 **WORKFLOW**: Generate Comprehensive Tests | 👤 **PERSONAS**: Test Engineer
+
 Embody this expert persona:
 <!-- INCLUDE: system/personas.md#SENIOR_TEST_ENGINEER -->
 

@@ -1,5 +1,7 @@
 # /prdq - Quick Product Requirements (You & Claude)
 
+🎯 **COMMAND**: /prdq | 📋 **WORKFLOW**: Quick Product Requirements (You & Claude) | 👤 **PERSONAS**: Product Engineer + Software Architect
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#PRODUCT_ENGINEER -->
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->

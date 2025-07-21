@@ -1,5 +1,7 @@
 # /build - Platform-Specific Build Commands
 
+🎯 **COMMAND**: /build | 📋 **WORKFLOW**: Platform-Specific Build Commands | 👤 **PERSONAS**: DevOps Engineer
+
 Embody this expert persona:
 <!-- INCLUDE: system/personas.md#DEVOPS_ENGINEER -->
 

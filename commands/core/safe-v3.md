@@ -1,5 +1,7 @@
 # /safe-v3 - Safe General Workflow
 
+🎯 **COMMAND**: /safe-v3 | 📋 **WORKFLOW**: v3 - Safe General Workflow | 👤 **PERSONAS**: Code Reviewer + Software Architect
+
 **[CMD: /safe-v3 | PERSONAS: Code Reviewer + Software Architect]**
 
 Embody these expert personas:

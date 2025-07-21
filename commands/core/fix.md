@@ -1,5 +1,7 @@
 # /fix - Systematic Fix Workflow
 
+🎯 **COMMAND**: /fix | 📋 **WORKFLOW**: Systematic Fix Workflow | 👤 **PERSONAS**: Test Engineer + SRE Engineer
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SENIOR_TEST_ENGINEER -->
 <!-- INCLUDE: system/personas.md#SRE_ENGINEER -->

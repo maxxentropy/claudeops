@@ -1,5 +1,7 @@
 # /test-hooks - Verify Hook Configuration
 
+🎯 **COMMAND**: /test-hooks | 📋 **WORKFLOW**: hooks - Verify Hook Configuration | 👤 **PERSONAS**: Default
+
 Verify that your Claude Code hooks are properly configured and firing.
 
 ## Testing Process

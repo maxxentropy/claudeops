@@ -1,5 +1,7 @@
 # /config - Configuration Change Workflow
 
+🎯 **COMMAND**: /config | 📋 **WORKFLOW**: Configuration Change Workflow | 👤 **PERSONAS**: Security Engineer + DevOps Engineer
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SECURITY_ENGINEER -->
 <!-- INCLUDE: system/personas.md#DEVOPS_ENGINEER -->

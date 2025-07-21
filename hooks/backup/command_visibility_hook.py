@@ -211,7 +211,18 @@ def main():
     """
     Main entry point for the hook.
     Reads JSON from stdin, prints visibility header to stderr.
+    
+    Claude Code Hook Exit Code Behavior (from official docs):
+    - Exit code 0: stdout is shown to the user in transcript mode (CTRL-R)
+    - Exit code 2: stderr is fed back to Claude to process automatically (blocking)
+    - Other exit codes: stderr is shown to the user and execution continues
+    
+    We use exit code 1 to display the header to the user without blocking.
     """
+    # Debug logging to verify hook execution
+    with open('/tmp/command_visibility_hook.log', 'a') as f:
+        f.write(f"Hook executed at {__import__('datetime').datetime.now()}\n")
+    
     try:
         # Read JSON input from stdin
         input_data = json.load(sys.stdin)
@@ -230,6 +241,10 @@ def main():
         
         command_name = parts[0][1:].lower()
         
+        # Debug logging
+        with open('/tmp/command_visibility_hook.log', 'a') as f:
+            f.write(f"Processing command: /{command_name}\n")
+        
         # Find command file
         command_file = find_command_file(command_name)
         if not command_file:
@@ -247,7 +262,13 @@ def main():
         header = format_command_header(command_name, workflow, personas)
         print(header.strip(), file=sys.stderr)
         
+        # Force flush to ensure output is sent
+        sys.stderr.flush()
+        
         # Exit with code 1 to show stderr to user without blocking
+        # IMPORTANT: Exit code 1 (or any non-0, non-2 code) shows stderr to user
+        # Exit code 0 would only show in transcript mode (Ctrl-R)
+        # Exit code 2 would block and feed to Claude instead of user
         sys.exit(1)
         
     except Exception:

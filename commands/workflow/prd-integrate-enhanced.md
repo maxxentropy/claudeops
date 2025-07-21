@@ -1,5 +1,7 @@
 # /prd-integrate-enhanced - Smart PRD Integration with Python Fix
 
+🎯 **COMMAND**: /prd-integrate-enhanced | 📋 **WORKFLOW**: integrate-enhanced - Smart PRD Integration with Python Fix | 👤 **PERSONAS**: Software Architect + Devops Architect
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
 <!-- INCLUDE: system/personas.md#DEVOPS_ARCHITECT -->

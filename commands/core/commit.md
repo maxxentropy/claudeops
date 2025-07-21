@@ -1,5 +1,7 @@
 # /commit - Safe Commit Workflow
 
+🎯 **COMMAND**: /commit | 📋 **WORKFLOW**: Safe Commit Workflow | 👤 **PERSONAS**: Code Reviewer + Security Engineer
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#CODE_REVIEWER -->
 <!-- INCLUDE: system/personas.md#SECURITY_ENGINEER -->

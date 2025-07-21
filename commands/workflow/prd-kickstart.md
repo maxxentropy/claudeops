@@ -1,5 +1,7 @@
 # /prd-kickstart - Auto-Generate Implementation Phases from PRD
 
+🎯 **COMMAND**: /prd-kickstart | 📋 **WORKFLOW**: kickstart - Auto-Generate Implementation Phases from PRD | 👤 **PERSONAS**: Software Architect + Product Engineer
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
 <!-- INCLUDE: system/personas.md#PRODUCT_ENGINEER -->

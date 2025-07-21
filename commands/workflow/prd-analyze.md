@@ -1,5 +1,7 @@
 # /prd-analyze - Analyze PRD Dependencies and Execution Plan
 
+🎯 **COMMAND**: /prd-analyze | 📋 **WORKFLOW**: analyze - Analyze PRD Dependencies and Execution Plan | 👤 **PERSONAS**: Software Architect + Systems Analyst
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
 <!-- INCLUDE: system/personas.md#SYSTEMS_ANALYST -->

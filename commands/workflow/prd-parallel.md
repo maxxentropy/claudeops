@@ -1,5 +1,7 @@
 # /prd-parallel - Execute PRD Phases in Parallel
 
+🎯 **COMMAND**: /prd-parallel | 📋 **WORKFLOW**: parallel - Execute PRD Phases in Parallel | 👤 **PERSONAS**: Software Architect + DevOps Engineer
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
 <!-- INCLUDE: system/personas.md#DEVOPS_ENGINEER -->

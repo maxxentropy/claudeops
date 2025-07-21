@@ -1,5 +1,7 @@
 # Pull Request Review Command
 
+🎯 **COMMAND**: /review-pr | 📋 **WORKFLOW**: Workflow | 👤 **PERSONAS**: Default
+
 You will perform a comprehensive code review of the current changes. Follow this systematic approach:
 
 ## Review Checklist

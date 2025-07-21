@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Command visibility hook v2 - More prominent output
+Command visibility hook - Blocking version for testing.
+Temporarily blocks to show the header, then immediately unblocks.
 """
 
 import json
@@ -42,7 +43,7 @@ def extract_personas(content: str) -> List[str]:
     
     persona_map = {
         'SENIOR_TEST_ENGINEER': 'Test Engineer',
-        'SOFTWARE_ARCHITECT': 'Architect',
+        'SOFTWARE_ARCHITECT': 'Architect', 
         'SECURITY_ENGINEER': 'Security',
         'DEVOPS_ENGINEER': 'DevOps',
         'CODE_REVIEWER': 'Reviewer',
@@ -59,40 +60,45 @@ def extract_personas(content: str) -> List[str]:
     return personas
 
 def main():
-    """Main entry point for the hook."""
+    """Main entry point."""
     try:
         input_data = json.load(sys.stdin)
         prompt = input_data.get('prompt', '').strip()
         
         if not prompt.startswith('/'):
-            return
+            sys.exit(0)
         
         parts = prompt.split()
         if not parts or len(parts[0]) <= 1:
-            return
+            sys.exit(0)
         
         command_name = parts[0][1:].lower()
-        command_file = find_command_file(command_name)
         
-        if not command_file:
-            return
+        # Special case: if command has !! suffix, show blocking message
+        if prompt.endswith('!!'):
+            command_file = find_command_file(command_name)
+            if command_file:
+                try:
+                    content = command_file.read_text(encoding='utf-8')
+                    personas = extract_personas(content)
+                    persona_str = ' + '.join(personas) if personas else 'Standard'
+                    
+                    # Block with informative message
+                    output = {
+                        "decision": "block",
+                        "reason": f"Command: /{command_name} | Personas: {persona_str}\n\nRemove !! to execute"
+                    }
+                    print(json.dumps(output))
+                    sys.exit(0)
+                    
+                except Exception:
+                    pass
         
-        try:
-            content = command_file.read_text(encoding='utf-8')
-            personas = extract_personas(content)
-            
-            # More compact output format
-            persona_str = ' + '.join(personas) if personas else 'Standard'
-            
-            # Print to stderr for more visibility?
-            output = f"\n▶ /{command_name} | Personas: {persona_str}\n"
-            print(output, file=sys.stderr)
-            
-        except Exception:
-            pass
-            
+        # Normal execution - don't block
+        sys.exit(0)
+        
     except Exception:
-        pass
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()

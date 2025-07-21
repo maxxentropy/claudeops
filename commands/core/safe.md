@@ -1,5 +1,7 @@
 # /safe - Safe General Workflow
 
+🎯 **COMMAND**: /safe | 📋 **WORKFLOW**: Safe General Workflow | 👤 **PERSONAS**: Code Reviewer + Software Architect
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#CODE_REVIEWER -->
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
