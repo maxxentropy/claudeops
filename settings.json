@@ -45,11 +45,7 @@
           {
             "type": "command",
             "command": "python3 ~/.claude/hooks/slash_command_validator.py"
-          },
-          {
-            "type": "command",
-            "command": "python3 ~/.claude/hooks/command_visibility_hook.py"
-          }          
+          }
         ]
       }
     ]
