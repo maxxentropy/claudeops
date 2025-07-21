@@ -242,12 +242,12 @@ def main():
             personas = extract_personas(content)
             workflow = extract_workflow_description(command_name, content)
             
-            # Create and print header to stderr with exit code 2
-            # This makes it visible to the user in the UI
+            # Create and print header to stderr
+            # Exit code 1 shows stderr to user without blocking
             header = format_command_header(command_name, workflow, personas)
             print(header.strip(), file=sys.stderr)
-            # Exit with code 2 to show stderr to user
-            sys.exit(2)
+            # Exit with code 1 to show message but allow command execution
+            sys.exit(1)
             
         except Exception:
             # On any error, stay silent
