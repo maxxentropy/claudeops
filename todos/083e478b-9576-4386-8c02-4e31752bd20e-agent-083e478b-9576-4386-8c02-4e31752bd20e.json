@@ -1,0 +1,26 @@
+[
+  {
+    "content": "Clean previous build artifacts",
+    "status": "in_progress",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Restore NuGet packages",
+    "status": "pending",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Build the solution in Release configuration",
+    "status": "pending",
+    "priority": "high",
+    "id": "3"
+  },
+  {
+    "content": "Verify build output and check for errors",
+    "status": "pending",
+    "priority": "high",
+    "id": "4"
+  }
+]

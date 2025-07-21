@@ -109,7 +109,7 @@ def extract_workflow_description(command_name: str, content: str) -> str:
     
     # Fallback descriptions for known commands
     workflow_map = {
-        'safe': 'Safe General Workflow with Full Verification',
+        'safe': 'Safe General Workflow',
         'commit': 'Safe Git Commit with Pre-commit Verification',
         'fix': 'Systematic Debugging with Root Cause Analysis',
         'test': 'Generate Comprehensive Test Suite (80% Coverage Target)',
@@ -210,7 +210,7 @@ def process_prompt(input_data: Dict, commands_dir: Path = None) -> Optional[Dict
 def main():
     """
     Main entry point for the hook.
-    Reads JSON from stdin, prints visibility header to stdout.
+    Reads JSON from stdin, prints visibility header to stderr.
     """
     try:
         # Read JSON input from stdin
@@ -220,42 +220,39 @@ def main():
         
         # Only process if it starts with a slash
         if not prompt.startswith('/'):
-            return
+            # Not a slash command, exit quietly
+            sys.exit(0)
         
         # Extract command name
         parts = prompt.split()
         if not parts or len(parts[0]) <= 1:
-            return
+            sys.exit(0)
         
         command_name = parts[0][1:].lower()
         
         # Find command file
         command_file = find_command_file(command_name)
         if not command_file:
-            return
+            # Command doesn't exist, let validator handle it
+            sys.exit(0)
         
-        try:
-            # Read command content
-            content = command_file.read_text(encoding='utf-8')
-            
-            # Extract information
-            personas = extract_personas(content)
-            workflow = extract_workflow_description(command_name, content)
-            
-            # Create and print header to stderr
-            # Exit code 1 shows stderr to user without blocking
-            header = format_command_header(command_name, workflow, personas)
-            print(header.strip(), file=sys.stderr)
-            # Exit with code 1 to show message but allow command execution
-            sys.exit(1)
-            
-        except Exception:
-            # On any error, stay silent
-            pass
-            
+        # Read command content
+        content = command_file.read_text(encoding='utf-8')
+        
+        # Extract information
+        personas = extract_personas(content)
+        workflow = extract_workflow_description(command_name, content)
+        
+        # Create and print header to stderr
+        header = format_command_header(command_name, workflow, personas)
+        print(header.strip(), file=sys.stderr)
+        
+        # Exit with code 1 to show stderr to user without blocking
+        sys.exit(1)
+        
     except Exception:
-        # On error, allow through (fail open)
-        pass
+        # On any error, exit quietly to not interfere
+        sys.exit(0)
 
 
 if __name__ == "__main__":

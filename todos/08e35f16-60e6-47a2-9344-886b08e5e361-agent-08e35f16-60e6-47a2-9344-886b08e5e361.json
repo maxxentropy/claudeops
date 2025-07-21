@@ -1,0 +1,26 @@
+[
+  {
+    "content": "Move /config directory to archive to avoid conflicts",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Add archive directory to .gitignore",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Fix command visibility hook to work with correct settings location",
+    "status": "completed",
+    "priority": "high",
+    "id": "3"
+  },
+  {
+    "content": "Test the hook is working properly",
+    "status": "in_progress",
+    "priority": "medium",
+    "id": "4"
+  }
+]
