@@ -15,6 +15,8 @@ This directory contains all PRDs for the project. PRDs are automatically generat
 | Date | Title | Status | Phase | Author | Link |
 |------|-------|--------|-------|--------|------|
 | 2025-01-20 | Continuously Improving Claude System | DRAFT | - | Claude+User | [View](./2025-01-20-continuous-improvement.md) |
+| 2025-01-21 | Parallel PRD Execution System | DRAFT | - | Claude+User | [View](./2025-01-21-parallel-prd-execution.md) |
+| 2025-01-21 | Parallel PRD Execution System (Enhanced) | DRAFT | - | Claude+User | [View](./2025-01-21-parallel-prd-execution-enhanced.md) |
 
 ## Completed PRDs
 

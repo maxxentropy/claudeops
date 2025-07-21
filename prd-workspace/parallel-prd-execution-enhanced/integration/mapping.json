@@ -1,0 +1,18 @@
+{
+  "repository": "~/.claude",
+  "mappings": {
+    "src/config/": "lib/prd-parallel/config/",
+    "src/core/": "lib/prd-parallel/core/",
+    "src/models/": "lib/prd-parallel/models/",
+    "commands/": "commands/workflow/",
+    "tests/": "tests/prd-parallel/"
+  },
+  "phase_mappings": {
+    "phase-1": {
+      "src/config/parallel_config.py": "lib/prd-parallel/config/parallel_config.py",
+      "src/core/resource_manager.py": "lib/prd-parallel/core/resource_manager.py",
+      "src/models/execution_state.py": "lib/prd-parallel/models/execution_state.py",
+      "src/models/parallel_execution.py": "lib/prd-parallel/models/parallel_execution.py"
+    }
+  }
+}

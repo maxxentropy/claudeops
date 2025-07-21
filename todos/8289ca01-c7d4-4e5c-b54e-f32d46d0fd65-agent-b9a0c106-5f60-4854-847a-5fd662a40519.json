@@ -1,0 +1,32 @@
+[
+  {
+    "content": "Create models directory and parallel_execution.py with core data structures",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Create execution_state.py with state management models",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Create core directory and resource_manager.py with lock infrastructure",
+    "status": "completed",
+    "priority": "high",
+    "id": "3"
+  },
+  {
+    "content": "Create config directory and parallel_config.py with configuration schema",
+    "status": "completed",
+    "priority": "high",
+    "id": "4"
+  },
+  {
+    "content": "Create tests directory and test_models.py with unit tests",
+    "status": "in_progress",
+    "priority": "medium",
+    "id": "5"
+  }
+]

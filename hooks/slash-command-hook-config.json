@@ -1,0 +1,26 @@
+{
+  "description": "Validates slash commands before execution to prevent unrecognized commands",
+  "hook_configuration": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/slash_command_validator.py"
+          }
+        ]
+      }
+    ]
+  },
+  "installation_instructions": [
+    "1. Make the validator executable: chmod +x ~/.claude/hooks/slash_command_validator.py",
+    "2. Add the 'hook_configuration' content above to your ~/.claude/settings.json under the 'hooks' key",
+    "3. If you don't have a settings.json, create one with: {\"hooks\": <hook_configuration>}",
+    "4. Restart Claude Code for changes to take effect"
+  ],
+  "testing": [
+    "Try typing: /save (should be blocked with suggestion for /safe)",
+    "Try typing: /build (should work normally)",
+    "Try typing: /xyz123 (should be blocked with no suggestions)"
+  ]
+}

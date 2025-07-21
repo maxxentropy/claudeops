@@ -26,6 +26,12 @@ alias ccdocs='claude /create-docs'
 # PRD workflow aliases
 alias ccprd='claude /prd'
 alias ccprdq='claude /prdq'
+alias cckick='claude /prd-kickstart'
+alias ccphase='claude /prd-implement'
+alias ccpreview='claude /prd-preview'
+alias ccintegrate='claude /prd-integrate'
+alias ccrollback='claude /prd-rollback'
+alias cctrack='claude /prd-progress'
 
 # Utility functions
 ccnew() {
@@ -54,8 +60,13 @@ cchelp() {
     print -P "  %F{white}ccdocs%f          - Generate documentation"
     print ""
     print -P "%F{cyan}PRD Workflow:%f"
-    print -P "  %F{white}ccprd%f           - Create full PRD"
-    print -P "  %F{white}ccprdq%f          - Quick PRD"
+    print -P "  %F{white}ccprdq%f          - Create quick PRD"
+    print -P "  %F{white}cckick%f          - Auto-generate phases"
+    print -P "  %F{white}ccphase%f         - Implement specific phase"
+    print -P "  %F{white}ccpreview%f       - Preview integration"
+    print -P "  %F{white}ccintegrate%f     - Apply to repository"
+    print -P "  %F{white}ccrollback%f      - Undo integration"
+    print -P "  %F{white}cctrack%f         - Monitor progress"
     print ""
     print -P "%F{cyan}Functions:%f"
     print -P "  %F{white}ccnew <type>%f    - Create new project"

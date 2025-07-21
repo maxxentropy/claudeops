@@ -1,0 +1,13 @@
+{
+  "description": "Validates slash commands before execution to prevent unrecognized commands",
+  "hook_config": {
+    "UserPromptSubmit": [{
+      "hooks": [{
+        "type": "command",
+        "command": "~/.claude/hooks/validate-slash-command.sh \"${USER_PROMPT}\"",
+        "timeout": 2
+      }]
+    }]
+  },
+  "installation": "Add the hook_config content to your Claude Code settings.json under the 'hooks' key"
+}

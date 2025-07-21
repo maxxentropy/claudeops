@@ -1,0 +1,44 @@
+[
+  {
+    "content": "Verify prerequisites and set up Phase 2 directory structure",
+    "status": "in_progress",
+    "priority": "high",
+    "id": "phase2-setup"
+  },
+  {
+    "content": "Create phase file parser to extract dependencies and metadata from markdown files",
+    "status": "pending",
+    "priority": "high",
+    "id": "phase2-parser"
+  },
+  {
+    "content": "Build dependency analyzer to construct dependency graphs from parsed phases",
+    "status": "pending",
+    "priority": "high",
+    "id": "phase2-analyzer"
+  },
+  {
+    "content": "Implement wave calculator using topological sorting for parallel execution",
+    "status": "pending",
+    "priority": "high",
+    "id": "phase2-wave-calc"
+  },
+  {
+    "content": "Create conflict detector to identify potential resource conflicts",
+    "status": "pending",
+    "priority": "medium",
+    "id": "phase2-conflict"
+  },
+  {
+    "content": "Write comprehensive test suite for all Phase 2 components",
+    "status": "pending",
+    "priority": "high",
+    "id": "phase2-tests"
+  },
+  {
+    "content": "Save reference artifacts and update tracker",
+    "status": "pending",
+    "priority": "medium",
+    "id": "phase2-artifacts"
+  }
+]

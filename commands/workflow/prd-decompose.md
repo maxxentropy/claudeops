@@ -1,8 +1,11 @@
 # /prd-decompose - Break PRD into Implementable Phases
 
 Embody these expert personas:
-<!-- INCLUDE: system/../system/personas.md#SOFTWARE_ARCHITECT -->
-<!-- INCLUDE: system/../system/personas.md#PRODUCT_ENGINEER -->
+<!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
+<!-- INCLUDE: system/personas.md#PRODUCT_ENGINEER -->
+
+First, load and follow these principles:
+<!-- INCLUDE: system/principles.md#CORE_PRINCIPLES -->
 
 Transform PRDs into tracked, phased implementations:
 

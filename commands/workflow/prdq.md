@@ -1,8 +1,11 @@
 # /prdq - Quick Product Requirements (You & Claude)
 
 Embody these expert personas:
-<!-- INCLUDE: system/../system/personas.md#PRODUCT_ENGINEER -->
-<!-- INCLUDE: system/../system/personas.md#SOFTWARE_ARCHITECT -->
+<!-- INCLUDE: system/personas.md#PRODUCT_ENGINEER -->
+<!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
+
+First, load and follow these principles:
+<!-- INCLUDE: system/principles.md#CORE_PRINCIPLES -->
 
 Create a quick, actionable requirements doc for immediate implementation:
 
