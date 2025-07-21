@@ -1,5 +1,7 @@
 # Fix and Test Command
 
+🎯 **COMMAND**: /fix-and-test | 📋 **WORKFLOW**: Workflow | 👤 **PERSONAS**: Default
+
 Intelligently debug issues and ensure comprehensive test coverage using xUnit.
 
 ## Workflow:

@@ -1,5 +1,7 @@
 # /prd-integrate-v2 - Enhanced PRD Integration with Import Fixing
 
+🎯 **COMMAND**: /prd-integrate-v2 | 📋 **WORKFLOW**: integrate-v2 - Enhanced PRD Integration with Import Fixing | 👤 **PERSONAS**: Software Architect + Devops Architect
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
 <!-- INCLUDE: system/personas.md#DEVOPS_ARCHITECT -->

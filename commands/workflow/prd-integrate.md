@@ -1,5 +1,7 @@
 # /prd-integrate - Integrate PRD Results into Repository
 
+🎯 **COMMAND**: /prd-integrate | 📋 **WORKFLOW**: integrate - Integrate PRD Results into Repository | 👤 **PERSONAS**: Software Architect + Devops Architect
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
 <!-- INCLUDE: system/personas.md#DEVOPS_ARCHITECT -->

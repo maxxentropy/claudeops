@@ -1,5 +1,7 @@
 # Git History Investigation Command
 
+🎯 **COMMAND**: /git-investigate | 📋 **WORKFLOW**: Workflow | 👤 **PERSONAS**: Default
+
 You are about to investigate the git history of a file or codebase to understand:
 - Why code was written this way
 - What problems it was solving

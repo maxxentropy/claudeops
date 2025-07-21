@@ -1,5 +1,7 @@
 # /prd-implement - Execute PRD Phase with Full Context
 
+🎯 **COMMAND**: /prd-implement | 📋 **WORKFLOW**: implement - Execute PRD Phase with Full Context | 👤 **PERSONAS**: Software Architect + Test Engineer
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
 <!-- INCLUDE: system/personas.md#SENIOR_TEST_ENGINEER -->

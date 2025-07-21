@@ -1,5 +1,7 @@
 # /pattern - Code Pattern Implementation
 
+🎯 **COMMAND**: /pattern | 📋 **WORKFLOW**: Code Pattern Implementation | 👤 **PERSONAS**: Default
+
 Embody this expert persona:
 <!-- INCLUDE: ../system/personas.md#SOFTWARE_ARCHITECT -->
 

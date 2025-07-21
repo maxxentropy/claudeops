@@ -1,5 +1,7 @@
 # Context Prime Command
 
+🎯 **COMMAND**: /context-prime | 📋 **WORKFLOW**: Workflow | 👤 **PERSONAS**: Default
+
 You are about to analyze and understand a software project comprehensively. Your goal is to build a complete mental model of the codebase.
 
 Please perform the following steps:

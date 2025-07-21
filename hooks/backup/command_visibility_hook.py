@@ -33,7 +33,20 @@ def find_command_file(command_name: str, commands_dir: Path = None) -> Optional[
     if not commands_dir.exists():
         return None
     
-    # Search for the command file
+    # Handle path-based format (e.g., "core:commit")
+    if ':' in command_name:
+        # Split into path parts
+        parts = command_name.split(':')
+        # Construct the path
+        command_path = commands_dir
+        for part in parts[:-1]:
+            command_path = command_path / part
+        command_path = command_path / f"{parts[-1]}.md"
+        
+        if command_path.exists():
+            return command_path
+    
+    # Search for the command file by name only
     for md_file in commands_dir.rglob("*.md"):
         if md_file.stem == command_name:
             return md_file
@@ -96,7 +109,7 @@ def extract_workflow_description(command_name: str, content: str) -> str:
     
     # Fallback descriptions for known commands
     workflow_map = {
-        'safe': 'Safe General Workflow with Full Verification',
+        'safe': 'Safe General Workflow',
         'commit': 'Safe Git Commit with Pre-commit Verification',
         'fix': 'Systematic Debugging with Root Cause Analysis',
         'test': 'Generate Comprehensive Test Suite (80% Coverage Target)',
@@ -197,23 +210,70 @@ def process_prompt(input_data: Dict, commands_dir: Path = None) -> Optional[Dict
 def main():
     """
     Main entry point for the hook.
-    Reads JSON from stdin, processes, writes JSON to stdout.
+    Reads JSON from stdin, prints visibility header to stderr.
+    
+    Claude Code Hook Exit Code Behavior (from official docs):
+    - Exit code 0: stdout is shown to the user in transcript mode (CTRL-R)
+    - Exit code 2: stderr is fed back to Claude to process automatically (blocking)
+    - Other exit codes: stderr is shown to the user and execution continues
+    
+    We use exit code 1 to display the header to the user without blocking.
     """
+    # Debug logging to verify hook execution
+    with open('/tmp/command_visibility_hook.log', 'a') as f:
+        f.write(f"Hook executed at {__import__('datetime').datetime.now()}\n")
+    
     try:
         # Read JSON input from stdin
         input_data = json.load(sys.stdin)
         
-        # Process the prompt
-        result = process_prompt(input_data)
+        prompt = input_data.get('prompt', '').strip()
         
-        # If we have modifications, output them
-        if result:
-            print(json.dumps(result))
-        # Otherwise, no output means pass through unchanged
-            
+        # Only process if it starts with a slash
+        if not prompt.startswith('/'):
+            # Not a slash command, exit quietly
+            sys.exit(0)
+        
+        # Extract command name
+        parts = prompt.split()
+        if not parts or len(parts[0]) <= 1:
+            sys.exit(0)
+        
+        command_name = parts[0][1:].lower()
+        
+        # Debug logging
+        with open('/tmp/command_visibility_hook.log', 'a') as f:
+            f.write(f"Processing command: /{command_name}\n")
+        
+        # Find command file
+        command_file = find_command_file(command_name)
+        if not command_file:
+            # Command doesn't exist, let validator handle it
+            sys.exit(0)
+        
+        # Read command content
+        content = command_file.read_text(encoding='utf-8')
+        
+        # Extract information
+        personas = extract_personas(content)
+        workflow = extract_workflow_description(command_name, content)
+        
+        # Create and print header to stderr
+        header = format_command_header(command_name, workflow, personas)
+        print(header.strip(), file=sys.stderr)
+        
+        # Force flush to ensure output is sent
+        sys.stderr.flush()
+        
+        # Exit with code 1 to show stderr to user without blocking
+        # IMPORTANT: Exit code 1 (or any non-0, non-2 code) shows stderr to user
+        # Exit code 0 would only show in transcript mode (Ctrl-R)
+        # Exit code 2 would block and feed to Claude instead of user
+        sys.exit(1)
+        
     except Exception:
-        # On error, allow through (fail open)
-        pass
+        # On any error, exit quietly to not interfere
+        sys.exit(0)
 
 
 if __name__ == "__main__":

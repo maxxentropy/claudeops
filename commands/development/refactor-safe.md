@@ -1,5 +1,7 @@
 # Safe Refactoring Command
 
+🎯 **COMMAND**: /refactor-safe | 📋 **WORKFLOW**: Workflow | 👤 **PERSONAS**: Default
+
 You will guide a safe, incremental refactoring process. The key principle: maintain working code at all times.
 
 ## Refactoring Process

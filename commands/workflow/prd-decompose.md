@@ -1,5 +1,7 @@
 # /prd-decompose - Break PRD into Implementable Phases
 
+🎯 **COMMAND**: /prd-decompose | 📋 **WORKFLOW**: decompose - Break PRD into Implementable Phases | 👤 **PERSONAS**: Software Architect + Product Engineer
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
 <!-- INCLUDE: system/personas.md#PRODUCT_ENGINEER -->

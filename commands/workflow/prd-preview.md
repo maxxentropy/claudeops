@@ -1,5 +1,7 @@
 # /prd-preview - Preview PRD Integration Changes
 
+🎯 **COMMAND**: /prd-preview | 📋 **WORKFLOW**: preview - Preview PRD Integration Changes | 👤 **PERSONAS**: Software Architect + Devops Architect
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
 <!-- INCLUDE: system/personas.md#DEVOPS_ARCHITECT -->

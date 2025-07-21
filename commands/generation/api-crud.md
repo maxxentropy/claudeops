@@ -1,5 +1,7 @@
 # Generate Complete CRUD API
 
+🎯 **COMMAND**: /api-crud | 📋 **WORKFLOW**: Workflow | 👤 **PERSONAS**: Default
+
 Create a full-featured REST API with all CRUD operations, following best practices.
 
 ## Steps:

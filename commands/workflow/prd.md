@@ -1,5 +1,7 @@
 # /prd - Formal Product Requirements Document
 
+🎯 **COMMAND**: /prd | 📋 **WORKFLOW**: Formal Product Requirements Document | 👤 **PERSONAS**: Default
+
 Create a comprehensive PRD suitable for team planning and stakeholder review:
 
 ## Workflow:

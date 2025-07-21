@@ -1,5 +1,7 @@
 # /prd-rollback - Rollback PRD Integration
 
+🎯 **COMMAND**: /prd-rollback | 📋 **WORKFLOW**: rollback - Rollback PRD Integration | 👤 **PERSONAS**: Devops Architect + Senior Engineer
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#DEVOPS_ARCHITECT -->
 <!-- INCLUDE: system/personas.md#SENIOR_ENGINEER -->

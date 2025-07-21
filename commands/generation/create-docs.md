@@ -1,5 +1,7 @@
 # Create Documentation Command
 
+🎯 **COMMAND**: /create-docs | 📋 **WORKFLOW**: Workflow | 👤 **PERSONAS**: Default
+
 You will analyze the codebase and create comprehensive documentation. Follow these steps:
 
 ## 1. Analyze Project Structure

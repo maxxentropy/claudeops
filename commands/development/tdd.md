@@ -1,5 +1,7 @@
 # Test-Driven Development (TDD) Workflow
 
+🎯 **COMMAND**: /tdd | 📋 **WORKFLOW**: Workflow | 👤 **PERSONAS**: Default
+
 You will guide the user through a Test-Driven Development process. Follow the RED-GREEN-REFACTOR cycle strictly.
 
 ## TDD Process:

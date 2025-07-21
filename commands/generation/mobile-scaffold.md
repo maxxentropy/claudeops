@@ -1,5 +1,7 @@
 # Mobile App Scaffold Command - Prism Edition
 
+🎯 **COMMAND**: /mobile-scaffold | 📋 **WORKFLOW**: Workflow | 👤 **PERSONAS**: Default
+
 Create a complete MAUI mobile application using Prism framework with modular architecture.
 
 ## Steps:

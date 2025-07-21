@@ -1,6 +1,6 @@
-# /safe - Safe General Workflow
+# /safe-v2 - Safe General Workflow (With Visible Header)
 
-🎯 **COMMAND**: /safe | 📋 **WORKFLOW**: Safe General Workflow | 👤 **PERSONAS**: Code Reviewer + Software Architect
+🎯 **COMMAND**: /safe-v2 | 📋 **WORKFLOW**: Safe General Workflow | 👤 **PERSONAS**: Code Reviewer + Software Architect
 
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#CODE_REVIEWER -->

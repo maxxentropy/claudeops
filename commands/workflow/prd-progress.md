@@ -1,5 +1,7 @@
 # /prd-progress - Monitor and Resume PRD Implementation
 
+🎯 **COMMAND**: /prd-progress | 📋 **WORKFLOW**: progress - Monitor and Resume PRD Implementation | 👤 **PERSONAS**: Project Manager + Software Architect
+
 Embody these expert personas:
 <!-- INCLUDE: system/personas.md#PROJECT_MANAGER -->
 <!-- INCLUDE: system/personas.md#SOFTWARE_ARCHITECT -->
