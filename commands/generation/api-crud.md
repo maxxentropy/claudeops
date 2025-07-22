@@ -4,6 +4,47 @@
 
 Create a full-featured REST API with all CRUD operations, following best practices.
 
+## Path Resolution
+API files will be created in appropriate repository-relative directories, automatically resolved from any working directory.
+
+**Implementation Note:**
+```python
+# Import path resolution utilities
+import sys
+import os
+sys.path.insert(0, os.path.expanduser('~/.claude'))
+from system.utils import path_resolver
+
+# Standard API structure
+controller_dir = path_resolver.ensure_directory('lib')
+service_dir = path_resolver.ensure_directory('lib')
+dto_dir = path_resolver.ensure_directory('lib')
+test_dir = path_resolver.ensure_directory('tests')
+
+# Create subdirectories
+(controller_dir / 'controllers').mkdir(exist_ok=True)
+(service_dir / 'services').mkdir(exist_ok=True)
+(dto_dir / 'dtos').mkdir(exist_ok=True)
+(test_dir / 'api').mkdir(exist_ok=True)
+
+# Define file paths
+controller_path = controller_dir / 'controllers' / f'{entity_name}Controller.cs'
+service_path = service_dir / 'services' / f'{entity_name}Service.cs'
+dto_path = dto_dir / 'dtos' / f'{entity_name}Dto.cs'
+test_path = test_dir / 'api' / f'{entity_name}ControllerTests.cs'
+
+# After creating files, format output
+output_paths = {
+    "Controller created": controller_path,
+    "Service created": service_path,
+    "DTOs created": dto_path,
+    "Tests created": test_path
+}
+print(path_resolver.format_output_message(output_paths))
+```
+
+**Important**: Never hardcode paths. Always use the path resolver to ensure files are created in the correct repository-relative locations.
+
 ## Steps:
 
 1. Analyze the entity/model to create API for

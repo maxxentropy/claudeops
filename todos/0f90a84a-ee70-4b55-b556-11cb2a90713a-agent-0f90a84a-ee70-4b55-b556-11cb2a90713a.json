@@ -1,0 +1,32 @@
+[
+  {
+    "content": "Run git status to see all changes",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Review staged changes with git diff",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Check recent commits for style consistency",
+    "status": "completed",
+    "priority": "high",
+    "id": "3"
+  },
+  {
+    "content": "Verify changes for security issues",
+    "status": "completed",
+    "priority": "high",
+    "id": "4"
+  },
+  {
+    "content": "Stage and commit changes",
+    "status": "in_progress",
+    "priority": "high",
+    "id": "5"
+  }
+]

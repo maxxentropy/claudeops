@@ -19,7 +19,7 @@ Shows a dry-run of the integration process, allowing review before actual file c
 ## Workflow
 
 1. **Load Integration Context**:
-   - Read from `.claude/prd-workspace/[project]/integration/mapping.json`
+   - Read from `.claude/prd-workspace/[project]/integration/mapping.json` (repository-relative)
    - Scan sandbox directory for all files
    - Detect current repository context
 
@@ -98,6 +98,12 @@ Shows a dry-run of the integration process, allowing review before actual file c
 - `--verbose`: Show full file diffs
 - `--phase N`: Preview only specific phase changes
 - `--json`: Output in JSON format for tooling
+
+## Path Resolution:
+- This command automatically uses repository-relative paths
+- All paths resolve to the repository root when in a git repository
+- Falls back to current directory when not in a repository
+- Set `CLAUDE_OUTPUT_ROOT` environment variable to override
 
 ## Safety Features
 

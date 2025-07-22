@@ -4,6 +4,8 @@
 
 This system breaks down large PRDs into context-window-optimized phases that can be implemented step-by-step using existing slash commands. It ensures no context is lost, progress is tracked, and work can be resumed across sessions.
 
+**Path Resolution**: All PRD-related files are automatically saved relative to your repository root, regardless of where you run the commands. See [Path Resolution Guide](PATH_RESOLUTION_GUIDE.md) for configuration options.
+
 ## Complete Workflow
 
 ### Step 1: Create PRD
@@ -11,7 +13,8 @@ This system breaks down large PRDs into context-window-optimized phases that can
 # Quick 1-page PRD
 ccprdq "implement user dashboard with real-time updates"
 
-# Creates: docs/prds/YYYY-MM-DD-user-dashboard.md
+# Creates: {repo}/docs/prds/YYYY-MM-DD-user-dashboard.md
+# Note: Always saves to repo root, even if you're in a subdirectory!
 ```
 
 ### Step 2: Auto-Generate Implementation Phases  
@@ -19,13 +22,14 @@ ccprdq "implement user dashboard with real-time updates"
 # Break PRD into optimal phases
 cckick user-dashboard
 
-# Creates workspace: .claude/prd-workspace/user-dashboard/
+# Creates workspace: {repo}/.claude/prd-workspace/user-dashboard/
 # - prd-original.md (copy of PRD)
 # - prd-tracker.md (progress tracking)  
 # - phase-1-foundation.md (phase specs)
 # - phase-2-component.md
 # - phase-N-integration.md
 # - artifacts/ (directory for outputs)
+# Note: Workspace is always at repo root for team consistency!
 ```
 
 ### Step 3: Implement Phases Step-by-Step

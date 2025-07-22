@@ -2,6 +2,8 @@
 
 All commands use tagged principles from `principles.md` to ensure consistency.
 
+**Note on File Paths**: All slash commands now use intelligent path resolution to save files relative to your repository root, regardless of your current directory. See [Path Resolution Guide](PATH_RESOLUTION_GUIDE.md) for details.
+
 ## Core Development Commands
 
 ### `/safe [task description]`
@@ -42,22 +44,22 @@ Example: `/pattern repository for User entity`
 
 ### `/prdq [feature description]`
 Quick requirements doc for immediate work between you and Claude.
-Output: 1-page actionable requirements.
+Output: 1-page actionable requirements saved to `{repo}/docs/prds/`.
 Example: `/prdq implement Azure MCP server tools`
 
 ### `/prd [feature description]`
 Formal PRD for team planning and stakeholder review.
-Output: Comprehensive multi-section document.
+Output: Comprehensive multi-section document saved to `{repo}/docs/prds/`.
 Example: `/prd multi-factor authentication system`
 
 ### `/prd-decompose [prd name or content]`
 Break down a PRD into manageable phases with dependency tracking.
-Output: Phased implementation plan with context preservation.
+Output: Phased implementation plan saved to `{repo}/.claude/prd-workspace/`.
 Example: `/prd-decompose continuous-improvement-prd.md`
 
 ### `/prd-implement [project] [phase]`
 Execute a specific PRD phase with full context from previous phases.
-Loads all artifacts and ensures continuity across implementation.
+Works in sandbox at `{repo}/.claude/prd-workspace/{project}/sandbox/`.
 Example: `/prd-implement continuous-improvement phase-3`
 
 ## Meta Commands

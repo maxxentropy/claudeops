@@ -1,0 +1,32 @@
+[
+  {
+    "content": "Create repository root detection utility in system/utils/repo_detector.py",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Create path resolution service for converting relative paths",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Update /prd command to use repository-relative paths",
+    "status": "completed",
+    "priority": "high",
+    "id": "3"
+  },
+  {
+    "content": "Update /prdq command to use repository-relative paths",
+    "status": "completed",
+    "priority": "high",
+    "id": "4"
+  },
+  {
+    "content": "Test the implementation with different directory scenarios",
+    "status": "completed",
+    "priority": "medium",
+    "id": "5"
+  }
+]

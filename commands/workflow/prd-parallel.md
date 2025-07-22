@@ -14,8 +14,8 @@ Execute multiple PRD phases in parallel with intelligent dependency management, 
 ## Workflow:
 
 1. **Load PRD Context**:
-   - Read original PRD from `.claude/prd-workspace/[project]/prd-original.md`
-   - Load tracker from `.claude/prd-workspace/[project]/prd-tracker.md`
+   - Read original PRD from `.claude/prd-workspace/[project]/prd-original.md` (repository-relative)
+   - Load tracker from `.claude/prd-workspace/[project]/prd-tracker.md` (repository-relative)
    - Load all phase specifications from phase files
 
 2. **Analyze Dependencies**:
@@ -180,6 +180,12 @@ Execute multiple PRD phases in parallel with intelligent dependency management, 
 > 
 > Use /prd-integrate to merge results into main repository
 ```
+
+## Path Resolution:
+- This command automatically uses repository-relative paths
+- All paths resolve to the repository root when in a git repository
+- Falls back to current directory when not in a repository
+- Set `CLAUDE_OUTPUT_ROOT` environment variable to override
 
 ## Integration with Other Commands:
 

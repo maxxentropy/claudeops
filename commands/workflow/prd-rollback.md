@@ -126,3 +126,94 @@ Provides a safety net for PRD integrations:
 ```
 
 This ensures that any PRD integration can be safely undone if issues arise.
+
+## Path Resolution:
+- This command automatically uses repository-relative paths
+- Backup files are loaded from `.claude/prd-workspace/[project]/backups/` at repository root
+- Files are restored to their original locations relative to repository root
+- If not in a git repository, falls back to current directory
+- Set `CLAUDE_OUTPUT_ROOT` environment variable to override
+
+## Implementation Note:
+When implementing this command, always use the path resolution utilities to ensure consistent paths:
+
+```python
+# Import path resolution utilities
+import sys
+import os
+sys.path.insert(0, os.path.expanduser('~/.claude'))
+from system.utils import path_resolver
+
+# Get workspace path for the project
+workspace_path = path_resolver.get_workspace_path(project_name)
+
+if not workspace_path.exists():
+    print(f"No workspace found for project: {project_name}")
+    return
+
+# Find backups directory
+backups_dir = workspace_path / "backups"
+if not backups_dir.exists():
+    print(f"No backups found for project: {project_name}")
+    return
+
+# List available backups
+backups = sorted(backups_dir.iterdir(), reverse=True)  # Most recent first
+
+# For specific backup
+if backup_id:
+    backup_path = backups_dir / backup_id
+else:
+    # Use most recent backup
+    backup_path = backups[0] if backups else None
+
+if not backup_path or not backup_path.exists():
+    print(f"Backup not found: {backup_id or 'latest'}")
+    return
+
+# Load backup manifest
+manifest_path = backup_path / "manifest.json"
+import json
+with open(manifest_path) as f:
+    manifest = json.load(f)
+
+# Get repository root for file restoration
+repo_root = path_resolver.get_repo_root()
+if not repo_root:
+    print("Warning: Not in a git repository, using current directory")
+    repo_root = Path.cwd()
+
+# Restore files
+backup_files_dir = backup_path / "files"
+for relative_path in manifest['modified_files']:
+    backup_file = backup_files_dir / relative_path
+    target_file = repo_root / relative_path
+    
+    if backup_file.exists():
+        import shutil
+        shutil.copy2(backup_file, target_file)
+        print(f"✓ Restored: {relative_path}")
+
+# Remove new files
+for relative_path in manifest['created_files']:
+    target_file = repo_root / relative_path
+    if target_file.exists():
+        target_file.unlink()
+        print(f"✓ Removed: {relative_path}")
+
+# Archive rollback
+rollback_history = workspace_path / "rollback-history" / backup_id
+rollback_history.mkdir(parents=True, exist_ok=True)
+shutil.move(str(backup_path), str(rollback_history))
+
+# Format output
+output_paths = {
+    "Rollback completed from": backup_path,
+    "Files restored": len(manifest['modified_files']),
+    "Files removed": len(manifest['created_files']),
+    "Rollback archived to": rollback_history
+}
+print(path_resolver.format_output_message(output_paths))
+```
+
+**Important**: Never hardcode paths like `.claude/prd-workspace/`. Always use the path resolver to ensure paths work correctly from any directory.

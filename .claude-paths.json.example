@@ -1,0 +1,10 @@
+{
+  "_comment": "Project-specific path overrides for slash commands",
+  "_description": "Copy this file to .claude-paths.json in your repository root to customize output paths",
+  
+  "prds": "documentation/requirements",
+  "prd_workspace": ".project/prd-workspace",
+  "docs": "documentation",
+  "tests": "test",
+  "lib": "src"
+}

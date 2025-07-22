@@ -14,7 +14,7 @@ Take a PRD (from `/prdq` or manual) and automatically create a complete phase-ba
 ## Workflow:
 
 1. **Load PRD Source**:
-   - If given slug: Load from `docs/prds/[slug].md`  
+   - If given slug: Load from `docs/prds/[slug].md` (repository-relative)  
    - If no arg: Find most recent PRD in `docs/prds/`
    - Parse PRD content for requirements analysis
 
@@ -105,6 +105,12 @@ Take a PRD (from `/prdq` or manual) and automatically create a complete phase-ba
 - Leverages existing tracker templates  
 - Compatible with current PRD storage structure
 - Works with both `/prdq` quick PRDs and full `/prd` documents
+
+## Path Resolution:
+- This command automatically uses repository-relative paths
+- All paths resolve to the repository root when in a git repository
+- Falls back to current directory when not in a repository
+- Set `CLAUDE_OUTPUT_ROOT` environment variable to override
 
 ## Example Usage:
 ```bash

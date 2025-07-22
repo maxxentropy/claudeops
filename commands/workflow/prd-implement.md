@@ -18,6 +18,7 @@ Execute a specific phase of a decomposed PRD with complete context awareness:
    - Load tracker from `.claude/prd-workspace/[project]/prd-tracker.md`
    - Read phase spec from `.claude/prd-workspace/[project]/phase-[N]-[name].md`
    - **Load all previous phase artifacts** from `artifacts/`
+   - Note: All paths automatically resolve to repository root
 
 2. **Setup Sandbox Environment**:
    ```
@@ -107,6 +108,45 @@ Execute a specific phase of a decomposed PRD with complete context awareness:
     ├── mapping.json           # File destination mappings
     └── conflicts.log          # Detected conflicts
 ```
+
+## Path Resolution:
+- This command automatically uses repository-relative paths
+- Workspace paths are resolved to `.claude/prd-workspace/` at repository root
+- If not in a git repository, falls back to current directory
+- Set `CLAUDE_OUTPUT_ROOT` environment variable to override
+- All file operations use the path resolver for consistency
+
+## Implementation Note:
+When implementing this command, always use the path resolution utilities to ensure consistent paths:
+
+```python
+# Import path resolution utilities
+import sys
+import os
+sys.path.insert(0, os.path.expanduser('~/.claude'))
+from system.utils import path_resolver
+
+# Get workspace path for the project
+workspace_path = path_resolver.get_workspace_path(project_name)
+
+# Access phase files
+prd_path = workspace_path / "prd-original.md"
+tracker_path = workspace_path / "prd-tracker.md"
+phase_path = workspace_path / f"phase-{phase_number}-{phase_name}.md"
+
+# Create sandbox directory
+sandbox_path = workspace_path / "sandbox"
+sandbox_path.mkdir(parents=True, exist_ok=True)
+
+# Format output messages with relative paths
+output_paths = {
+    "Workspace": workspace_path,
+    "Sandbox created": sandbox_path
+}
+print(path_resolver.format_output_message(output_paths))
+```
+
+**Important**: Never hardcode paths like `.claude/prd-workspace/`. Always use the path resolver to ensure paths work correctly from any directory.
 
 ## Integration Workflow:
 

@@ -101,3 +101,59 @@ Phase 3: Command Enhancement Layer (2 hrs)
 ```
 
 This ensures large PRDs are implemented systematically with full context preservation.
+
+## Path Resolution:
+- This command automatically uses repository-relative paths
+- PRDs are loaded from `docs/prds/` at repository root
+- Workspace created at `.claude/prd-workspace/` at repository root
+- If not in a git repository, falls back to current directory
+- Set `CLAUDE_OUTPUT_ROOT` environment variable to override
+
+## Implementation Note:
+When implementing this command, always use the path resolution utilities to ensure consistent paths:
+
+```python
+# Import path resolution utilities
+import sys
+import os
+sys.path.insert(0, os.path.expanduser('~/.claude'))
+from system.utils import path_resolver
+
+# Load PRD from proper location
+if feature_slug:
+    # Find PRD by slug in the prds directory
+    prds_dir = path_resolver.resolve('prds')
+    prd_files = list(prds_dir.glob(f"*-{feature_slug}.md"))
+    if prd_files:
+        prd_path = prd_files[0]  # Use most recent if multiple
+else:
+    # Direct file path provided
+    prd_path = Path(filename).resolve()
+
+# Create workspace for the project
+workspace_path = path_resolver.get_workspace_path(feature_slug)
+workspace_path.mkdir(parents=True, exist_ok=True)
+
+# Copy PRD to workspace
+import shutil
+shutil.copy2(prd_path, workspace_path / "prd-original.md")
+
+# Create phase files
+for i, phase in enumerate(phases, 1):
+    phase_path = workspace_path / f"phase-{i}-{phase['name']}.md"
+    phase_path.write_text(phase_content)
+
+# Create tracker
+tracker_path = workspace_path / "prd-tracker.md"
+tracker_path.write_text(tracker_content)
+
+# Format output message
+output_paths = {
+    "PRD loaded from": prd_path,
+    "Workspace created": workspace_path,
+    "Tracker created": tracker_path
+}
+print(path_resolver.format_output_message(output_paths))
+```
+
+**Important**: Never hardcode paths like `docs/prds/` or `.claude/prd-workspace/`. Always use the path resolver to ensure paths work correctly from any directory.

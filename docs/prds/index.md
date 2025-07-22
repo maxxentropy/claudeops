@@ -18,6 +18,7 @@ This directory contains all PRDs for the project. PRDs are automatically generat
 | 2025-01-21 | Parallel PRD Execution System | DRAFT | - | Claude+User | [View](./2025-01-21-parallel-prd-execution.md) |
 | 2025-01-21 | Parallel PRD Execution System (Enhanced) | DRAFT | - | Claude+User | [View](./2025-01-21-parallel-prd-execution-enhanced.md) |
 | 2025-01-21 | Unified Cross-Platform Shell Integration | DRAFT | - | Claude+User | [View](./2025-01-21-unified-shell-integration.md) |
+| 2025-01-21 | Consistent Slash Command Output Paths | DRAFT | - | Claude+User | [View](./2025-01-21-consistent-slash-command-paths.md) |
 
 ## Completed PRDs
 

@@ -139,6 +139,27 @@ Package Structure:
 Ready to integrate with automatic fixes
 ```
 
+## PRD Parallel Integration Support
+
+For the `prd_parallel` project specifically, use the enhanced integration script:
+
+```bash
+# Run the v2 integration for prd_parallel
+python ~/.claude/scripts/integrate_prd_parallel_v2.py
+
+# Preview changes without applying
+python ~/.claude/scripts/integrate_prd_parallel_v2.py --dry-run
+
+# Integrate a different PRD project
+python ~/.claude/scripts/integrate_prd_parallel_v2.py [project-name]
+```
+
+The enhanced script provides:
+- Automatic import transformation for all prd_parallel modules
+- Test file import fixing (removes sys.path manipulations)
+- Comprehensive validation of transformed imports
+- Detailed transformation report
+
 ## Safety Features
 
 1. **Dry Run Mode**: Preview all transformations

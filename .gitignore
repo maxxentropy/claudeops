@@ -76,3 +76,8 @@ scratch/
 
 # Archive directory
 archive/
+
+# Session and project specific files (excluded from commits)
+statsig/statsig.session_id.*
+SESSION_RESUME_CONTEXT.md
+projects/-Users-sean--claude/*.jsonl

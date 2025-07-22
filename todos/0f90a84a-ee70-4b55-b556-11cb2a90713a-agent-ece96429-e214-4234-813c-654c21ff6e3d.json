@@ -1,0 +1,38 @@
+[
+  {
+    "content": "Define Phase 3 objectives for consistent slash command paths",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Add path resolution to remaining slash commands that don't use it yet",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Create a /path-info command to show current path resolution settings",
+    "status": "completed",
+    "priority": "medium",
+    "id": "3"
+  },
+  {
+    "content": "Add project-specific path override support via .claude-paths.json",
+    "status": "completed",
+    "priority": "medium",
+    "id": "4"
+  },
+  {
+    "content": "Update hook system to automatically inject path resolution into all commands",
+    "status": "pending",
+    "priority": "low",
+    "id": "5"
+  },
+  {
+    "content": "Create comprehensive test suite for all updated commands",
+    "status": "completed",
+    "priority": "high",
+    "id": "6"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "content": "Create comprehensive test suite for repository detection utility",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Create test suite for path resolution service",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Test all updated slash commands for correct path behavior",
+    "status": "completed",
+    "priority": "high",
+    "id": "3"
+  },
+  {
+    "content": "Test edge cases: nested git repos, submodules, non-git directories",
+    "status": "completed",
+    "priority": "high",
+    "id": "4"
+  },
+  {
+    "content": "Test CLAUDE_OUTPUT_ROOT environment variable override",
+    "status": "completed",
+    "priority": "medium",
+    "id": "5"
+  },
+  {
+    "content": "Create documentation for the new path resolution system",
+    "status": "completed",
+    "priority": "medium",
+    "id": "6"
+  },
+  {
+    "content": "Update existing documentation to reflect the changes",
+    "status": "completed",
+    "priority": "medium",
+    "id": "7"
+  },
+  {
+    "content": "Create migration guide for users",
+    "status": "completed",
+    "priority": "low",
+    "id": "8"
+  }
+]

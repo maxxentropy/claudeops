@@ -4,6 +4,20 @@
 
 You will guide the user through a Test-Driven Development process. Follow the RED-GREEN-REFACTOR cycle strictly.
 
+## Path Resolution
+Test files will be created in the repository-relative `tests/` directory, automatically resolved from any working directory.
+
+**Implementation Note:**
+```python
+from system.utils import resolve, ensure_directory
+
+# Ensure tests directory exists
+test_dir = ensure_directory('tests')
+
+# Create test file path
+test_file = resolve('tests', f'test_{feature_name}.py')
+```
+
 ## TDD Process:
 
 ### 1. RED Phase - Write a Failing Test

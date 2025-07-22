@@ -1,0 +1,32 @@
+[
+  {
+    "content": "Phase 1: Create repository root detection utility (repo_detector.py)",
+    "status": "completed",
+    "priority": "high",
+    "id": "phase-1-repo-detector"
+  },
+  {
+    "content": "Phase 2: Implement path resolution service with caching",
+    "status": "completed",
+    "priority": "high",
+    "id": "phase-2-path-resolver"
+  },
+  {
+    "content": "Phase 3: Update hook infrastructure to inject REPO_ROOT",
+    "status": "completed",
+    "priority": "high",
+    "id": "phase-3-hook-integration"
+  },
+  {
+    "content": "Phase 4: Update all slash commands to use repository-relative paths",
+    "status": "completed",
+    "priority": "medium",
+    "id": "phase-4-command-updates"
+  },
+  {
+    "content": "Phase 5: Create comprehensive tests for edge cases",
+    "status": "completed",
+    "priority": "medium",
+    "id": "phase-5-testing"
+  }
+]

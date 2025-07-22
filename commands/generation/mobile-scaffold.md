@@ -4,6 +4,46 @@
 
 Create a complete MAUI mobile application using Prism framework with modular architecture.
 
+## Path Resolution
+Mobile app files will be created in a repository-relative project directory, automatically resolved from any working directory.
+
+**Implementation Note:**
+```python
+# Import path resolution utilities
+import sys
+import os
+sys.path.insert(0, os.path.expanduser('~/.claude'))
+from system.utils import path_resolver
+
+# Create project structure
+project_name = "MyMobileApp"  # From user input
+lib_dir = path_resolver.ensure_directory('lib')
+project_root = lib_dir / project_name
+project_root.mkdir(exist_ok=True)
+
+# Create module directories
+modules_dir = project_root / 'Modules'
+(modules_dir / 'Authentication').mkdir(parents=True, exist_ok=True)
+(modules_dir / 'Core').mkdir(parents=True, exist_ok=True)
+(modules_dir / 'Infrastructure').mkdir(parents=True, exist_ok=True)
+(project_root / 'Tests').mkdir(exist_ok=True)
+
+# Define file paths
+maui_program = project_root / 'MauiProgram.cs'
+auth_module = modules_dir / 'Authentication' / 'AuthenticationModule.cs'
+
+# After creating files, format output
+output_paths = {
+    "Project created": project_root,
+    "MauiProgram.cs": maui_program,
+    "Authentication module": auth_module,
+    "Modules directory": modules_dir
+}
+print(path_resolver.format_output_message(output_paths))
+```
+
+**Important**: Never hardcode paths. Always use the path resolver to ensure the mobile app is created in the correct repository-relative location.
+
 ## Steps:
 
 1. Create the Prism MAUI project structure:

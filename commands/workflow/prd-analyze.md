@@ -237,3 +237,58 @@ The analysis informs execution strategy:
 ```
 
 This provides complete visibility into PRD complexity and enables informed decisions about execution strategy.
+
+## Path Resolution:
+- This command automatically uses repository-relative paths
+- PRD workspaces are loaded from `.claude/prd-workspace/` at repository root
+- Analysis reports can be saved to workspace directory
+- If not in a git repository, falls back to current directory
+- Set `CLAUDE_OUTPUT_ROOT` environment variable to override
+
+## Implementation Note:
+When implementing this command, always use the path resolution utilities to ensure consistent paths:
+
+```python
+# Import path resolution utilities
+import sys
+import os
+sys.path.insert(0, os.path.expanduser('~/.claude'))
+from system.utils import path_resolver
+
+# Get workspace path for the project
+workspace_path = path_resolver.get_workspace_path(project_name)
+
+# Check if workspace exists
+if not workspace_path.exists():
+    print(f"No workspace found for project: {project_name}")
+    print(f"Run '/prd-decompose {project_name}' first")
+    return
+
+# Load PRD and phase files
+prd_path = workspace_path / "prd-original.md"
+tracker_path = workspace_path / "prd-tracker.md"
+
+# Find all phase files
+phase_files = sorted(workspace_path.glob("phase-*.md"))
+
+# Save analysis outputs
+if output_graph:
+    graph_path = workspace_path / "analysis-graph.html"
+    graph_path.write_text(graph_html)
+    
+if output_report:
+    report_path = workspace_path / "analysis-report.md"
+    report_path.write_text(report_content)
+
+# Format output paths
+output_paths = {
+    "Workspace analyzed": workspace_path,
+    "Graph saved to": graph_path if output_graph else None,
+    "Report saved to": report_path if output_report else None
+}
+# Filter out None values
+output_paths = {k: v for k, v in output_paths.items() if v}
+print(path_resolver.format_output_message(output_paths))
+```
+
+**Important**: Never hardcode paths like `.claude/prd-workspace/`. Always use the path resolver to ensure paths work correctly from any directory.

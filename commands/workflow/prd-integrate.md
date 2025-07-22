@@ -162,3 +162,76 @@ When conflicts are detected:
 - Respects .gitignore
 
 This ensures PRD implementations can be safely integrated into any repository.
+
+## Path Resolution:
+- This command automatically uses repository-relative paths
+- Workspace files are loaded from `.claude/prd-workspace/` at repository root
+- Backup directories are created within the workspace
+- Integration targets are resolved relative to repository root
+- If not in a git repository, falls back to current directory
+- Set `CLAUDE_OUTPUT_ROOT` environment variable to override
+
+## Implementation Note:
+When implementing this command, always use the path resolution utilities to ensure consistent paths:
+
+```python
+# Import path resolution utilities
+import sys
+import os
+sys.path.insert(0, os.path.expanduser('~/.claude'))
+from system.utils import path_resolver
+
+# Get workspace path for the project
+workspace_path = path_resolver.get_workspace_path(project_name)
+
+# Check workspace exists
+if not workspace_path.exists():
+    print(f"No workspace found for project: {project_name}")
+    return
+
+# Load integration mapping
+mapping_file = workspace_path / "integration" / "mapping.json"
+sandbox_path = workspace_path / "sandbox"
+
+# Create backup directory with timestamp
+from datetime import datetime
+timestamp = datetime.now().strftime('%Y-%m-%d-%H%M%S')
+backup_path = workspace_path / "backups" / timestamp
+backup_path.mkdir(parents=True, exist_ok=True)
+
+# Get repository root for integration targets
+repo_root = path_resolver.get_repo_root()
+if not repo_root:
+    print("Warning: Not in a git repository, using current directory")
+    repo_root = Path.cwd()
+
+# Apply mappings - example for a sandbox file
+for sandbox_file in sandbox_path.rglob("*"):
+    if sandbox_file.is_file():
+        # Determine target path based on mapping
+        relative_path = sandbox_file.relative_to(sandbox_path)
+        target_path = repo_root / map_sandbox_to_repo(relative_path, mapping)
+        
+        # Create parent directories
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Copy file (with backup if exists)
+        if target_path.exists():
+            backup_file = backup_path / relative_path
+            backup_file.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(target_path, backup_file)
+
+# Save integration report
+report_path = workspace_path / f"integration-report-{timestamp}.txt"
+report_path.write_text(integration_report)
+
+# Format output
+output_paths = {
+    "Workspace": workspace_path,
+    "Backup created": backup_path,
+    "Integration report": report_path
+}
+print(path_resolver.format_output_message(output_paths))
+```
+
+**Important**: Never hardcode paths like `.claude/prd-workspace/`. Always use the path resolver to ensure paths work correctly from any directory.

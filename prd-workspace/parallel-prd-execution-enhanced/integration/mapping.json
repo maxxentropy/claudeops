@@ -1,18 +1,26 @@
 {
   "repository": "~/.claude",
   "mappings": {
-    "src/config/": "lib/prd-parallel/config/",
-    "src/core/": "lib/prd-parallel/core/",
-    "src/models/": "lib/prd-parallel/models/",
+    "src/config/": "lib/prd_parallel/config/",
+    "src/core/": "lib/prd_parallel/core/",
+    "src/models/": "lib/prd_parallel/models/",
+    "src/analyzers/": "lib/prd_parallel/analyzers/",
+    "src/orchestrator/": "lib/prd_parallel/orchestrator/",
+    "src/parsers/": "lib/prd_parallel/parsers/",
+    "src/cli/": "lib/prd_parallel/cli/",
+    "src/monitoring/": "lib/prd_parallel/monitoring/",
+    "src/benchmarks/": "lib/prd_parallel/benchmarks/",
     "commands/": "commands/workflow/",
-    "tests/": "tests/prd-parallel/"
+    "src/tests/": "tests/prd_parallel/",
+    "docs/": "docs/prd_parallel/"
   },
-  "phase_mappings": {
-    "phase-1": {
-      "src/config/parallel_config.py": "lib/prd-parallel/config/parallel_config.py",
-      "src/core/resource_manager.py": "lib/prd-parallel/core/resource_manager.py",
-      "src/models/execution_state.py": "lib/prd-parallel/models/execution_state.py",
-      "src/models/parallel_execution.py": "lib/prd-parallel/models/parallel_execution.py"
-    }
-  }
+  "ignore": [
+    "*.pyc",
+    "__pycache__",
+    ".DS_Store",
+    "*.tmp",
+    "README.md",
+    "example_usage.py",
+    "shell_integration.sh"
+  ]
 }

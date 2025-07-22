@@ -1,0 +1,62 @@
+[
+  {
+    "content": "Create Azure DevOps core infrastructure (auth, versioning, rate limiting)",
+    "status": "in_progress",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Implement Azure DevOps base classes and interfaces",
+    "status": "pending",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Create Pipelines tools (list, run, logs, variables)",
+    "status": "pending",
+    "priority": "high",
+    "id": "3"
+  },
+  {
+    "content": "Create Boards tools (work items, queries, iterations)",
+    "status": "pending",
+    "priority": "high",
+    "id": "4"
+  },
+  {
+    "content": "Create Repos tools (repositories, pull requests, commits)",
+    "status": "pending",
+    "priority": "high",
+    "id": "5"
+  },
+  {
+    "content": "Create Artifacts tools (feeds, packages, permissions)",
+    "status": "pending",
+    "priority": "high",
+    "id": "6"
+  },
+  {
+    "content": "Implement command discovery and schema generation",
+    "status": "pending",
+    "priority": "medium",
+    "id": "7"
+  },
+  {
+    "content": "Add comprehensive error handling and retry logic",
+    "status": "pending",
+    "priority": "high",
+    "id": "8"
+  },
+  {
+    "content": "Create unit tests for all Azure DevOps tools",
+    "status": "pending",
+    "priority": "high",
+    "id": "9"
+  },
+  {
+    "content": "Add configuration and documentation",
+    "status": "pending",
+    "priority": "medium",
+    "id": "10"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "content": "Create phase breakdown for consistent-slash-command-paths PRD",
+    "status": "completed",
+    "priority": "high",
+    "id": "decompose-prd"
+  },
+  {
+    "content": "Implement Phase 4 of consistent-slash-command-paths",
+    "status": "completed",
+    "priority": "high",
+    "id": "phase-4-impl"
+  },
+  {
+    "content": "Update /prd-implement command with path resolver",
+    "status": "completed",
+    "priority": "medium",
+    "id": "update-prd-implement"
+  },
+  {
+    "content": "Update /prd-decompose command with path resolver",
+    "status": "completed",
+    "priority": "medium",
+    "id": "update-prd-decompose"
+  },
+  {
+    "content": "Update /prd-analyze command with path resolver",
+    "status": "completed",
+    "priority": "medium",
+    "id": "update-prd-analyze"
+  },
+  {
+    "content": "Update /prd-integrate command with path resolver",
+    "status": "completed",
+    "priority": "medium",
+    "id": "update-prd-integrate"
+  },
+  {
+    "content": "Update /prd-progress command with path resolver",
+    "status": "completed",
+    "priority": "medium",
+    "id": "update-prd-progress"
+  },
+  {
+    "content": "Update /prd-rollback command with path resolver",
+    "status": "completed",
+    "priority": "medium",
+    "id": "update-prd-rollback"
+  },
+  {
+    "content": "Check generation commands for file creation",
+    "status": "completed",
+    "priority": "medium",
+    "id": "check-generation-commands"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "content": "Create enhanced integration script for prd_parallel with v2 import fixing",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Update the prd-integrate-v2 command to support prd_parallel",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Test the integration with import transformations",
+    "status": "completed",
+    "priority": "medium",
+    "id": "3"
+  },
+  {
+    "content": "Create integration documentation",
+    "status": "completed",
+    "priority": "low",
+    "id": "4"
+  }
+]

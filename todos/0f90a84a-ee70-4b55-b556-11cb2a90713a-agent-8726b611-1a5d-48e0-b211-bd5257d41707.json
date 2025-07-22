@@ -1,0 +1,38 @@
+[
+  {
+    "content": "Identify all slash commands that write files and need path updates",
+    "status": "completed",
+    "priority": "high",
+    "id": "phase2-1"
+  },
+  {
+    "content": "Update PRD-related commands (/prd, /prdq) to use path_resolver",
+    "status": "completed",
+    "priority": "high",
+    "id": "phase2-2"
+  },
+  {
+    "content": "Update PRD workflow commands (/prd-implement, /prd-preview, etc.) to use path_resolver",
+    "status": "completed",
+    "priority": "high",
+    "id": "phase2-3"
+  },
+  {
+    "content": "Update generation commands that create files to use path_resolver",
+    "status": "completed",
+    "priority": "medium",
+    "id": "phase2-4"
+  },
+  {
+    "content": "Test commands from different subdirectories to verify repo-relative paths work",
+    "status": "completed",
+    "priority": "high",
+    "id": "phase2-5"
+  },
+  {
+    "content": "Verify CLAUDE_OUTPUT_ROOT environment variable override works",
+    "status": "completed",
+    "priority": "medium",
+    "id": "phase2-6"
+  }
+]
